@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  <link href="https://misland.github.io/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://misland.github.io/"/>
   <updated>2020-09-01T02:54:40.656Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://misland.github.io/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2020/09/01/hello-world/"/>
-    <id>http://yoursite.com/2020/09/01/hello-world/</id>
+    <link href="https://misland.github.io/2020/09/01/hello-world/"/>
+    <id>https://misland.github.io/2020/09/01/hello-world/</id>
     <published>2020-09-01T02:54:40.656Z</published>
     <updated>2020-09-01T02:54:40.656Z</updated>
     
