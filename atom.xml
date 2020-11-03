@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>暖宝宝官方认证铲屎官</title>
   
   
   <link href="https://misland.github.io/atom.xml" rel="self"/>
   
   <link href="https://misland.github.io/"/>
-  <updated>2020-09-01T02:54:40.656Z</updated>
+  <updated>2020-11-03T01:27:12.679Z</updated>
   <id>https://misland.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>李洛</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Couldn&#39;t get file path for photo on ANDROID 10</title>
+    <link href="https://misland.github.io/2020/11/03/android-camera/"/>
+    <id>https://misland.github.io/2020/11/03/android-camera/</id>
+    <published>2020-11-03T01:04:55.000Z</published>
+    <updated>2020-11-03T01:27:12.679Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨天在使用RN的react-native-image-picker（v2.3.4）组件时遇到了一个问题，通过yarn添加组件后，根据文档导入变量并调用相机拍照</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ImagePicker <span class="keyword">from</span> <span class="string">&#x27;react-native-image-picker&#x27;</span>;</span><br><span class="line">cameraOperation() &#123;</span><br><span class="line">    <span class="keyword">const</span> options = &#123;</span><br><span class="line">      title: <span class="string">&#x27;Take a photo&#x27;</span>,</span><br><span class="line">      <span class="comment">//自定义按钮，目前没发现有什么用</span></span><br><span class="line">      customButtons: [&#123; <span class="attr">name</span>: <span class="string">&#x27;fb&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;Choose photo from Facebook&#x27;</span> &#125;],</span><br><span class="line">      storageOptions: &#123;</span><br><span class="line">        skipBackup: <span class="literal">true</span>,</span><br><span class="line">        path: <span class="string">&#x27;images&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    ImagePicker.showImagePicker(options, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//path：图片的存储路径</span></span><br><span class="line">      <span class="comment">//uri：在当前app内的存储路径</span></span><br><span class="line">      <span class="comment">//width、height：拿到的图片的宽高</span></span><br><span class="line">      <span class="comment">//data：图片的base64格式数据</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;Response = &#x27;</span>, response);</span><br><span class="line">      <span class="keyword">if</span> (response.didCancel) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User cancled image picker&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">&#x27;ImagePicker error:&#x27;</span>, response.error);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.customButton) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User tapped custom button:&#x27;</span>, response.customButton);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(response.uri);</span><br><span class="line">        <span class="keyword">const</span> source = &#123; <span class="attr">uri</span>: response.uri &#125;;</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123; <span class="attr">avatarSource</span>: source &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><p>然而在支行时，却抛出了标题所述的错误，开始不得其解，后来搜索了一下资料，原来是因为API29的原因，API29对应的安卓版本是Android10，而Android中引入了分区存储（Scoped storage）的概念，这样做的初衷是为了避免APP乱写文件从而产生很多乱七八糟的冗余文件，更好的保护用户数据，具体的介绍可以看这里（<a href="https://juejin.im/post/6844904063432130568">传送门</a>）<br></p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>修改AndroidManifest.xml文件<br>我用的RN版本是0.63.3，react-native-cli的版本是4.13.0，项目是用react-native-cli来init的，AndroidManifest.xml路径在android/app/src/main下，在application标签中，添加<br><code>android:requestLegacyExternalStorage =&quot;true&quot;</code><br>属性，即可正常调用摄像头并拍照~</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;昨天在使用RN的react-native-image-picker（v2.3.4）组件时遇到了一个问题，通过yarn添加组件后，根据文档导入变量并调用相机拍照&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td c</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="https://misland.github.io/categories/Android/"/>
+    
+    
+    <category term="React Native" scheme="https://misland.github.io/tags/React-Native/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
-    <link href="https://misland.github.io/2020/09/01/hello-world/"/>
-    <id>https://misland.github.io/2020/09/01/hello-world/</id>
-    <published>2020-09-01T02:54:40.656Z</published>
-    <updated>2020-09-01T02:54:40.656Z</updated>
+    <link href="https://misland.github.io/2020/11/02/hello-world/"/>
+    <id>https://misland.github.io/2020/11/02/hello-world/</id>
+    <published>2020-11-02T08:49:25.000Z</published>
+    <updated>2020-11-02T08:50:21.240Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
@@ -33,6 +58,10 @@
     
     
     
+    <category term="测试" scheme="https://misland.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+    <category term="test" scheme="https://misland.github.io/tags/test/"/>
     
   </entry>
   
