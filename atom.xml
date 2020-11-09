@@ -6,7 +6,7 @@
   <link href="https://misland.github.io/atom.xml" rel="self"/>
   
   <link href="https://misland.github.io/"/>
-  <updated>2020-11-03T01:27:12.679Z</updated>
+  <updated>2020-11-09T09:04:11.810Z</updated>
   <id>https://misland.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>testimg</title>
+    <link href="https://misland.github.io/2020/11/09/testimg/"/>
+    <id>https://misland.github.io/2020/11/09/testimg/</id>
+    <published>2020-11-09T09:02:45.000Z</published>
+    <updated>2020-11-09T09:04:11.810Z</updated>
+    
+    <content type="html"><![CDATA[<p>hello world<br><img src="testimg/memory.png" alt="memory"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;hello world&lt;br&gt;&lt;img src=&quot;testimg/memory.png&quot; alt=&quot;memory&quot;&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Couldn&#39;t get file path for photo on ANDROID 10</title>

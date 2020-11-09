@@ -48,70 +48,14 @@
 
 
 
-    
-        <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        
-            load: ['[tex]/mhchem'],
-        
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        
-            packages: {'[+]': ['mhchem']},
-        
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
           
 
 
     
     
     <title>
-          
-            暖宝宝官方认证铲屎官
+        
+            testimg | 暖宝宝官方认证铲屎官
         
     </title>
     
@@ -256,11 +200,11 @@
 </aside>
   
   <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
     
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
+    
+      <div class="post-header"> 
   <a class="post-header-title" href="/2020/11/09/testimg/">testimg</a>
   <div class="post-header-meta">
     <span>
@@ -276,48 +220,11 @@
       分类于:&nbsp;
     </span>
     
-  </div>
-</div>   
-    
-
-
-
-      
-      
-  <div class="tag-line-space"></div>
-
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <p>hello world<br><img src="testimg/memory.png" alt="memory"></p>
-          
-        </div>
-        
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2020/11/09/testimg/">阅读更多</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
-      
-      
-        <div class="post-header"> 
-  <a class="post-header-title" href="/2020/11/03/android-camera/">Couldn&#39;t get file path for photo on ANDROID 10</a>
-  <div class="post-header-meta">
-    <span>
-      <span class="iconfont icon-calendar"></span>
-      发布于:&nbsp;2020-11-03
-    </span>
-    <span>
-      <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2020-11-03
-    </span>
-    <span>
-      <span class="iconfont icon-folder"></span>
-      分类于:&nbsp;<a class="category-link" href="/categories/Android/">Android</a>
-    </span>
+      <span>
+        <span class="iconfont icon-eye"></span>
+        阅读次数:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
     
   </div>
 </div>   
@@ -325,32 +232,125 @@
 
 
 
-      
-      
-  <div class="post-tags">
     
-      <i class="iconfont icon-tag">
-        <a rel="tag" href = /tags/React-Native/ >React Native</a>
-      </i>
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=testimg&url=https://misland.github.io/2020/11/09/testimg/&pic=https://misland.github.io/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=testimg&url=https://misland.github.io/2020/11/09/testimg/&via=李洛" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://misland.github.io/2020/11/09/testimg/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=https://misland.github.io/2020/11/09/testimg/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://misland.github.io/2020/11/09/testimg/&title=testimg" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=暖宝宝官方认证铲屎官&title=testimg&summary=为了暖宝宝的幸福生活而努力奋斗&pics=https://misland.github.io/images/favicon.ico&url=https://misland.github.io/2020/11/09/testimg/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=https://misland.github.io/2020/11/09/testimg/&text=testimg" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+        </li>
+      </ul>
     
   </div>
+  </header>
+  
+  
+  
+  
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>hello world<br><img src="testimg/memory.png" alt="memory"></p>
 
-      
-      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
-        <div class="post-abstract mdui-typo ">
-          
-            <p>昨天在使用RN的react-native-image-picker（v2.3.4）组件时遇到了一个问题，通过yarn添加组件后，根据文档导入变量并调用相机拍照</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ImagePicker <span class="keyword">from</span> <span class="string">&#x27;react-native-image-picker&#x27;</span>;</span><br><span class="line">cameraOperation() &#123;</span><br><span class="line">    <span class="keyword">const</span> options = &#123;</span><br><span class="line">      title: <span class="string">&#x27;Take a photo&#x27;</span>,</span><br><span class="line">      <span class="comment">//自定义按钮，目前没发现有什么用</span></span><br><span class="line">      customButtons: [&#123; <span class="attr">name</span>: <span class="string">&#x27;fb&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;Choose photo from Facebook&#x27;</span> &#125;],</span><br><span class="line">      storageOptions: &#123;</span><br><span class="line">        skipBackup: <span class="literal">true</span>,</span><br><span class="line">        path: <span class="string">&#x27;images&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    ImagePicker.showImagePicker(options, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//path：图片的存储路径</span></span><br><span class="line">      <span class="comment">//uri：在当前app内的存储路径</span></span><br><span class="line">      <span class="comment">//width、height：拿到的图片的宽高</span></span><br><span class="line">      <span class="comment">//data：图片的base64格式数据</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;Response = &#x27;</span>, response);</span><br><span class="line">      <span class="keyword">if</span> (response.didCancel) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User cancled image picker&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">&#x27;ImagePicker error:&#x27;</span>, response.error);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.customButton) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User tapped custom button:&#x27;</span>, response.customButton);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(response.uri);</span><br><span class="line">        <span class="keyword">const</span> source = &#123; <span class="attr">uri</span>: response.uri &#125;;</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123; <span class="attr">avatarSource</span>: source &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-          
-        </div>
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> The End --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2020/11/03/android-camera/">
+        <span>Couldn't get file path for photo on ANDROID 10</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2020/11/09/testimg/" id="toc-header" class="mdui-ripple">文章目录</a>
         
-        <div style="text-align:center;">
-          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2020/11/03/android-camera/">阅读更多</a>
-        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
+      <div class="mdui-tab" mdui-tab>
+        
+          <a href="#comment-tab0" class="mdui-ripple">gitalk</a>
+        
+          <a href="#comment-tab1" class="mdui-ripple">livere</a>
+        
       </div>
-    </article>
-
-
+      
+        <div id="comment-tab0" class="mdui-p-a-2">
+          <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: '9eb376fa0d8bc5918aed',
+    clientSecret: 'f66751ae6a6c4d26507f5cf4858fdb341783c933',
+    repo: 'BlogComment',
+    owner: 'happyNBB',
+    admin: ['happyNBB'],
+    id:  md5(location.pathname) ,
+    distractionFreeMode: 'true',
+  });
+  gitalk.render('gitalk-container');
+</script>
+        </div>
+      
+        <div id="comment-tab1" class="mdui-p-a-2">
+          <div id="lv-container" data-id="city" data-uid="">
+  <script type="text/javascript">
+    (function (d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') { return; }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>Please enable JavaScript to view the comments powered by LiveRe.</noscript>
+</div>
+        </div>
+      
+    </div>
 
   </main>
   <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
@@ -398,6 +398,12 @@
 
 
 
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
 
 

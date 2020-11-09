@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://misland.github.io/2020/11/09/testimg/</loc>
+    
+    <lastmod>2020-11-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://misland.github.io/about/index.html</loc>
     
     <lastmod>2020-11-03</lastmod>
@@ -32,7 +39,7 @@
 
   <url>
     <loc>https://misland.github.io/</loc>
-    <lastmod>2020-11-03</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -40,7 +47,7 @@
   
   <url>
     <loc>https://misland.github.io/tags/React-Native/</loc>
-    <lastmod>2020-11-03</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -49,7 +56,7 @@
   
   <url>
     <loc>https://misland.github.io/categories/Android/</loc>
-    <lastmod>2020-11-03</lastmod>
+    <lastmod>2020-11-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
