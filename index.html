@@ -261,7 +261,7 @@
       
       
         <div class="post-header"> 
-  <a class="post-header-title" href="/2020/11/09/ubuntu-systemback/">ubuntu-systemback</a>
+  <a class="post-header-title" href="/2020/11/09/ubuntu-systemback/">使用Systemback制做Ubuntu18.04镜像</a>
   <div class="post-header-meta">
     <span>
       <span class="iconfont icon-calendar"></span>
@@ -301,7 +301,9 @@
         <div class="post-abstract mdui-typo ">
           
             <p>最近因工作需要，想制做Ubuntu Desktop 18.04版本的系统镜像，在网上看了下SystemBack这个工具还不错，就试了下，试了下确实好用，不过有些问题还是需要注意一下的，并且这个工具还原时需要手动设置挂载点，这个对于不熟悉Linux的童鞋来说，可能还真有点坑，所以这里记录一下使用过程吧<br><br>here wo go！！！😜<br></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>  这个工具没有18.04的源了，只能用16.04的，但是CSDN上很多教程都不提这...
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>  这个工具没有18.04的源了，只能用16.04的，但是CSDN上很多教程都不提这一点，只是无脑的抄了别人的文章，我刚开始时就被坑了，按照CSDN上的一些垃圾教程，直接添加了18.04的ppa，结果后面安装时失败，各种问题，下面是正确的安装方式<br></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository <span class="string">&quot;deb http://ppa.launchpad.net/nemh/systemback/ubuntu xenial main&quot;</span></span><br><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 382003C2C8B7B4AB813E915B14E4942973C62A1B</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install systemback</span><br></pre></td></tr></table></figure>
+<p>如果你没遇到问题，那恭喜你已经安装成功了，可以继续看下面的使用部分了，如果失败那请搜索错误原因吧，因为我按照上面的方式装过好几次都是正常的😉<br>  如果已经看了垃圾教程，装了ppa，就要先删除<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository --remove ppa:nemh&#x2F;systemback</span><br></pre></td></tr></table></figure></p>
           
         </div>
         
