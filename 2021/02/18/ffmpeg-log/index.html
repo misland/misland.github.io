@@ -55,7 +55,7 @@
     
     <title>
         
-            about | 暖宝宝官方认证铲屎官
+            ffmpeg中的日志控制以及保存日志到指定文件 | 暖宝宝官方认证铲屎官
         
     </title>
     
@@ -200,20 +200,130 @@
 </aside>
   
   <main id="main-contain" class="mdui-container mdui-m-t-5">
-    <div class="mdui-card mdui-p-b-2 mdui-m-b-5">
-    <div class="post-header"> 
-        <a class="post-header-title" href="/about/index.html">关于</a>
-    </div>
-    <div id="page-card" class="mdui-card-content mdui-p-x-4">
-        
-            
-            
-            
-            <h3 id="李洛"><a href="#李洛" class="headerlink" title="李洛"></a>李洛</h3><h4 id="男"><a href="#男" class="headerlink" title="男"></a>男</h4><h4 id="已婚"><a href="#已婚" class="headerlink" title="已婚"></a>已婚</h4><h4 id="饲养神兽一头"><a href="#饲养神兽一头" class="headerlink" title="饲养神兽一头"></a>饲养神兽一头</h4><h4 id="医疗行业从业人员"><a href="#医疗行业从业人员" class="headerlink" title="医疗行业从业人员"></a>医疗行业从业人员</h4><h4 id="职业头衔：解决方案架构师"><a href="#职业头衔：解决方案架构师" class="headerlink" title="职业头衔：解决方案架构师"></a>职业头衔：解决方案架构师</h4><h4 id="邮箱：-109-x75-104-101-x30-x37-48-x32-64-111-x75-x74-108-x6f-x6f-x6b-46-x63-111-109"><a href="#邮箱：-109-x75-104-101-x30-x37-48-x32-64-111-x75-x74-108-x6f-x6f-x6b-46-x63-111-109" class="headerlink" title="邮箱：&#109;&#x75;&#104;&#101;&#x30;&#x37;&#48;&#x32;&#64;&#111;&#x75;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#46;&#x63;&#111;&#109;"></a>邮箱：<a href="mailto:&#109;&#x75;&#104;&#101;&#x30;&#x37;&#48;&#x32;&#64;&#111;&#x75;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#46;&#x63;&#111;&#109;">&#109;&#x75;&#104;&#101;&#x30;&#x37;&#48;&#x32;&#64;&#111;&#x75;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#46;&#x63;&#111;&#109;</a></h4>
-            
-        </div>
-    </div>
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
     
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2021/02/18/ffmpeg-log/">ffmpeg中的日志控制以及保存日志到指定文件</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      发布于:&nbsp;2021-02-18
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      更新于:&nbsp;2021-02-18
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      分类于:&nbsp;
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        阅读次数:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=ffmpeg中的日志控制以及保存日志到指定文件&url=https://misland.github.io/2021/02/18/ffmpeg-log/&pic=https://misland.github.io/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=ffmpeg中的日志控制以及保存日志到指定文件&url=https://misland.github.io/2021/02/18/ffmpeg-log/&via=李洛" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://misland.github.io/2021/02/18/ffmpeg-log/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=https://misland.github.io/2021/02/18/ffmpeg-log/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://misland.github.io/2021/02/18/ffmpeg-log/&title=ffmpeg中的日志控制以及保存日志到指定文件" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=暖宝宝官方认证铲屎官&title=ffmpeg中的日志控制以及保存日志到指定文件&summary=为了暖宝宝的幸福生活而努力奋斗&pics=https://misland.github.io/images/favicon.ico&url=https://misland.github.io/2021/02/18/ffmpeg-log/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=https://misland.github.io/2021/02/18/ffmpeg-log/&text=ffmpeg中的日志控制以及保存日志到指定文件" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/ffmpeg/ >ffmpeg</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <p>ffmpeg默认就会输出一些日志，包含编译的工具（gcc版本）、可用的组件（–enable-xxxx）、组件版本号码，如下图<br><img src="1.jpg" alt="log"></p>
+<a id="more"></a>
+<p>这些信息是默认输出的，每次执行合作都会打印在控制台中，如果不想看这些信息，ffmpeg提供了<code>-hide_banner</code>选项，添加该选项后，即不会打印这些信息<br>而在执行日志层面，ffmpeg日志与通用日志一致，也有级别的概念，可以使用<code>-v</code>选项来控制，设置级别时，可以使用英文单词，也可以使用数字，具体的级别如下</p>
+<h3 id="debug-48"><a href="#debug-48" class="headerlink" title="debug 48"></a>debug 48</h3><p>即debug级别的日志，在ffmpeg中使用48来标记，该级别会打印全部的日志，执行一个命令试试<br><code>ffmpeg -v debug -i 3.mp4 -vf scale=192x108 out.mp4 -y</code><br>该命令等效于<br><code>ffmpeg -v 48 -i 3.mp4 -vf scale=192x108 out.mp4 -y</code><br>执行命令后，控制台输出日志如下<br><img src="2.jpg" alt="debug_log"><br>上面的命令，将视频压缩成190x108分辨率的视频，使用了<code>-vf</code>选项，可以看到红框中的信息，将命令执行时的步骤很详细的打印了出来。</p>
+<h3 id="verbose-40"><a href="#verbose-40" class="headerlink" title="verbose 40"></a>verbose 40</h3><p>比debug日志简略一些，上面的命令同样再执行一次，上图红框中的信息就不再打印了</p>
+<h3 id="info-32"><a href="#info-32" class="headerlink" title="info 32"></a>info 32</h3><p>与verbose相似，显示的日志会稍微少些，这也是ffmpeg默认使用的日志级别</p>
+<h3 id="warning-24"><a href="#warning-24" class="headerlink" title="warning 24"></a>warning 24</h3><p>只显示warning或更严重的日志</p>
+<h3 id="error-16"><a href="#error-16" class="headerlink" title="error 16"></a>error 16</h3><p>只显示错误或更严重的日志</p>
+<h3 id="fatal-8"><a href="#fatal-8" class="headerlink" title="fatal 8"></a>fatal 8</h3><p>只显示致命错误，一般出现这些错误，程序会退出</p>
+<h3 id="panic-0"><a href="#panic-0" class="headerlink" title="panic 0"></a>panic 0</h3><p>只显示程序崩溃的日志，这种一般是ffmpeg内部的错误了，一般二般情况下应该都不会遇到的</p>
+<h3 id="quiet-8"><a href="#quiet-8" class="headerlink" title="quiet -8"></a>quiet -8</h3><p>什么也不显示，包括错误信息，生产环境通常并不会这么做，除非你疯了🤣<br>以上是控制日志打印级别，有时需要将日志保存下来，以备出现问题时定位问题，这时可以使用<code>- report</code>命令，将日志保存到文件中，执行命令<code>ffmpeg -report -i 3.mp4 -vf scale=192x108 out.mp4 -y</code>，执行后文件夹中出现了一个日志文件<br><img src="3.jpg" alt="report_log"><br>打开文件后，发现输出的日志与verbose级别一致。<br>但是这种方式文件名是ffmpeg根据时间默认生成的，如果要指定文件名可以吗？答案当然是肯定的，执行命令<br><code>FFREPORT=file=ffreport.log:level=32 ffmpeg -i 3.mp4 -vf scale=192x108 out.mp4 -y</code><br>成功执行后，会发现文件夹下多了一个名为ffreport.log的文件，即指定生成的日志文件</p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="iconfont icon-heartbeat" style="font-size:24px;"></i> The End --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2020/12/01/handlerMapping/">
+        <span>springboot源码解析-@RequestMapping是怎么工作的</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2021/02/18/ffmpeg-log/" id="toc-header" class="mdui-ripple">文章目录</a>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug-48"><span class="toc-number">1.</span> <span class="toc-text">debug 48</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#verbose-40"><span class="toc-number">2.</span> <span class="toc-text">verbose 40</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#info-32"><span class="toc-number">3.</span> <span class="toc-text">info 32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#warning-24"><span class="toc-number">4.</span> <span class="toc-text">warning 24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#error-16"><span class="toc-number">5.</span> <span class="toc-text">error 16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fatal-8"><span class="toc-number">6.</span> <span class="toc-text">fatal 8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#panic-0"><span class="toc-number">7.</span> <span class="toc-text">panic 0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#quiet-8"><span class="toc-number">8.</span> <span class="toc-text">quiet -8</span></a></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
     <div id="comment" class="mdui-card mdui-p-a-2 mdui-m-b-5">
       <div class="mdui-tab" mdui-tab>
         
@@ -259,8 +369,6 @@
         </div>
       
     </div>
-
-
 
   </main>
   <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
@@ -308,6 +416,12 @@
 
 
 
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
 
 
 
