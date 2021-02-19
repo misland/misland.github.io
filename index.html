@@ -261,7 +261,99 @@
       
       
         <div class="post-header"> 
-  <a class="post-header-title" href="/2021/02/18/ffmpeg-log/">ffmpeg中的日志控制、保存日志到指定文件、处理进度查询</a>
+  <a class="post-header-title" href="/2021/02/19/ffmpeg-filter/">ffmpeg：简单滤镜与复杂滤镜的区别</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      发布于:&nbsp;2021-02-19
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      更新于:&nbsp;2021-02-19
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      分类于:&nbsp;
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="tag-line-space"></div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <p>在ffmpeg的滤镜中，有简单滤镜（simple filter）和复杂滤镜（complex filter）两种。<br><br>使用简单滤镜时，用<code>-vf</code>选项，使用复杂滤镜时，使用<code>-filter_complex</code>或<code>-lavfi</code>。<br>那么什么时候用简单滤镜，什么时候用复杂滤镜？<br><br>其实很简单：<strong>是否只有一个输入文件，如果是，用简单滤镜，否，则应该用复杂滤镜</strong><br><br>执行一个命令试试<br><br><code>ffmpeg -hide_banner -i bi...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2021/02/19/ffmpeg-filter/">阅读更多</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2021/02/19/ffmpeg-watermark-1/">ffmpeg：为视频添加水印（一）</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      发布于:&nbsp;2021-02-19
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      更新于:&nbsp;2021-02-19
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      分类于:&nbsp;
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/ffmpeg/ >ffmpeg</a>
+      </i>
+    
+  </div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a...
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2021/02/19/ffmpeg-watermark-1/">阅读更多</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2021/02/18/ffmpeg-log/">ffmpeg：日志级别控制、保存日志到指定文件、处理进度查询</a>
   <div class="post-header-meta">
     <span>
       <span class="iconfont icon-calendar"></span>
@@ -269,7 +361,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2021-02-18
+      更新于:&nbsp;2021-02-19
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -483,7 +575,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2020-11-10
+      更新于:&nbsp;2021-02-18
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -512,7 +604,7 @@
           
             <p>昨天在使用RN的react-native-image-picker（v2.3.4）组件时遇到了一个问题，通过yarn添加组件后，根据文档导入变量并调用相机拍照</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ImagePicker <span class="keyword">from</span> <span class="string">&#x27;react-native-image-picker&#x27;</span>;</span><br><span class="line">cameraOperation() &#123;</span><br><span class="line">    <span class="keyword">const</span> options = &#123;</span><br><span class="line">      title: <span class="string">&#x27;Take a photo&#x27;</span>,</span><br><span class="line">      <span class="comment">//自定义按钮，目前没发现有什么用</span></span><br><span class="line">      customButtons: [&#123; <span class="attr">name</span>: <span class="string">&#x27;fb&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;Choose photo from Facebook&#x27;</span> &#125;],</span><br><span class="line">      storageOptions: &#123;</span><br><span class="line">        skipBackup: <span class="literal">true</span>,</span><br><span class="line">        path: <span class="string">&#x27;images&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    ImagePicker.showImagePicker(options, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//path：图片的存储路径</span></span><br><span class="line">      <span class="comment">//uri：在当前app内的存储路径</span></span><br><span class="line">      <span class="comment">//width、height：拿到的图片的宽高</span></span><br><span class="line">      <span class="comment">//data：图片的base64格式数据</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;Response = &#x27;</span>, response);</span><br><span class="line">      <span class="keyword">if</span> (response.didCancel) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User cancled image picker&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">&#x27;ImagePicker error:&#x27;</span>, response.error);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.customButton) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User tapped custom button:&#x27;</span>, response.customButton);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(response.uri);</span><br><span class="line">        <span class="keyword">const</span> source = &#123; <span class="attr">uri</span>: response.uri &#125;;</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123; <span class="attr">avatarSource</span>: source &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>然而在支行时，却抛出了标题所述的错误，开始不得其解，后来搜索了一下资料，原来是因为API29的原因，API29对应的安卓版本是Android10，而Android中引入了分区存储（Scoped storage）的概念，这样做的初衷是为了避免APP乱写文件从而产生很多乱七八糟的冗余文件，更好的保护用户数据，具体的介绍可以看这里（<a target="_blank" rel="noopener" href="https://juejin.im/post/6844904063432130568">传送门</a>）<br></p>
+<p>然而在运行时，却抛出了标题所述的错误，开始不得其解，后来搜索了一下资料，原来是因为API29的原因，API29对应的安卓版本是Android10，而Android中引入了分区存储（Scoped storage）的概念，这样做的初衷是为了避免APP乱写文件从而产生很多乱七八糟的冗余文件，更好的保护用户数据，具体的介绍可以看这里（<a target="_blank" rel="noopener" href="https://juejin.im/post/6844904063432130568">传送门</a>）<br></p>
           
         </div>
         
