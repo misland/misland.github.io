@@ -213,7 +213,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2021-02-19
+      更新于:&nbsp;2021-02-20
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -269,7 +269,7 @@
   
   
   <div class="mdui-card-content mdui-typo mdui-p-x-4">
-    <p>在ffmpeg的滤镜中，有简单滤镜（simple filter）和复杂滤镜（complex filter）两种。<br><br>使用简单滤镜时，用<code>-vf</code>选项，使用复杂滤镜时，使用<code>-filter_complex</code>或<code>-lavfi</code>。<br>那么什么时候用简单滤镜，什么时候用复杂滤镜？<br><br>其实很简单：<strong>是否只有一个输入文件，如果是，用简单滤镜，否，则应该用复杂滤镜</strong><br><br>执行一个命令试试<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -lavfi &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面的命令等效于<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面命令是给视频添左上角加了一个水印，命令可以成功执行，打开输出文件可以看到doggie已经成功加上去了<br><br><img src="filter1.jpg" alt="filter1"><br>为了验证上面的结论，咱们把命令换成下面的<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -vf &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>自然是会出错的，错误日志如下<br><br><img src="filter2.jpg" alt="filter error"><br>红框中的日志说的很清楚，<strong>对于简单滤镜，只能有一个输入输出</strong><br><br>所以，当有多个输入文件时，需要使用复杂滤镜。</p>
+    <p>在ffmpeg的滤镜中，有简单滤镜（simple filter）和复杂滤镜（complex filter）两种。<br><br>使用简单滤镜时，用<code>-vf</code>选项，使用复杂滤镜时，使用<code>-filter_complex</code>或<code>-lavfi</code>。<br>那么什么时候用简单滤镜，什么时候用复杂滤镜？<br><br>其实很简单：<strong>是否只有一个输入文件和一个输出文件，如果是，用简单滤镜，否，则应该用复杂滤镜</strong><br><br>执行一个命令试试<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -lavfi &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面的命令等效于<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面命令作用是给视频添左上角加一个水印，命令可以成功执行，打开输出文件可以看到doggie已经成功加上去了<br><br><img src="filter1.jpg" alt="filter1"><br>为了验证上面的结论，咱们把命令换成下面的<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -vf &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面命令把<code>-filter_complex</code>换成了<code>-vf</code>，结果自然是会出错的，错误日志如下<br><br><img src="filter2.jpg" alt="filter error"><br>红框中的日志说的很清楚，<strong>对于简单滤镜，只能有一个输入输出</strong><br><br>所以，当有多个输入文件时，需要使用复杂滤镜。</p>
 <h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h2>
   </div>
   <!--文末结束语-->
@@ -284,7 +284,7 @@
     
     
       <a rel="next" class="post-nav-item mdui-float-right" href="/2021/02/19/ffmpeg-watermark-1/">
-        <span>ffmpeg：为视频添加水印（一）</span>
+        <span>ffmpeg：为视频添加静态水印</span>
         <i class="iconfont icon-angle-right"></i>
       </a>
     

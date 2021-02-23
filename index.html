@@ -269,7 +269,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2021-02-19
+      更新于:&nbsp;2021-02-20
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -290,7 +290,7 @@
       <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
         <div class="post-abstract mdui-typo ">
           
-            <p>在ffmpeg的滤镜中，有简单滤镜（simple filter）和复杂滤镜（complex filter）两种。<br><br>使用简单滤镜时，用<code>-vf</code>选项，使用复杂滤镜时，使用<code>-filter_complex</code>或<code>-lavfi</code>。<br>那么什么时候用简单滤镜，什么时候用复杂滤镜？<br><br>其实很简单：<strong>是否只有一个输入文件，如果是，用简单滤镜，否，则应该用复杂滤镜</strong><br><br>执行一个命令试试<br><br><code>ffmpeg -hide_banner -i bi...
+            <p>在ffmpeg的滤镜中，有简单滤镜（simple filter）和复杂滤镜（complex filter）两种。<br><br>使用简单滤镜时，用<code>-vf</code>选项，使用复杂滤镜时，使用<code>-filter_complex</code>或<code>-lavfi</code>。<br>那么什么时候用简单滤镜，什么时候用复杂滤镜？<br><br>其实很简单：<strong>是否只有一个输入文件和一个输出文件，如果是，用简单滤镜，否，则应该用复杂滤镜</strong><br><br>执行一个命令试试<br><br><code>ffmpeg -hide_banne...
           
         </div>
         
@@ -304,7 +304,7 @@
       
       
         <div class="post-header"> 
-  <a class="post-header-title" href="/2021/02/19/ffmpeg-watermark-1/">ffmpeg：为视频添加水印（一）</a>
+  <a class="post-header-title" href="/2021/02/19/ffmpeg-watermark-1/">ffmpeg：为视频添加静态水印</a>
   <div class="post-header-meta">
     <span>
       <span class="iconfont icon-calendar"></span>
@@ -312,7 +312,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2021-02-19
+      更新于:&nbsp;2021-02-23
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -339,7 +339,7 @@
       <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
         <div class="post-abstract mdui-typo ">
           
-            <h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a...
+            <p>在ffmpeg中，添加水印需要用overlay滤镜，这是一个复杂滤镜，因为它需要两个输入，默认第一个输入是主画面，第二输入为水印，先执行一个简单的看看。<br>下面有两个文件，一个是可爱的大雄兔，一个是可爱的doggie，咱们就把doggie加到大雄兔上面去<br><img src="wm1.jpg" alt="wm1"><br>执行命令<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=0:y=0&quot; out.mp4 -y</c...
           
         </div>
         
