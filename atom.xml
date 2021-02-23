@@ -6,7 +6,7 @@
   <link href="https://misland.github.io/atom.xml" rel="self"/>
   
   <link href="https://misland.github.io/"/>
-  <updated>2021-02-20T01:55:54.572Z</updated>
+  <updated>2021-02-23T03:06:23.187Z</updated>
   <id>https://misland.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ffmpeg：为视频添加静态水印</title>
+    <link href="https://misland.github.io/2021/02/23/ffmpeg-watermark-1/"/>
+    <id>https://misland.github.io/2021/02/23/ffmpeg-watermark-1/</id>
+    <published>2021-02-23T07:02:39.000Z</published>
+    <updated>2021-02-23T03:06:23.187Z</updated>
+    
+    <content type="html"><![CDATA[<p>在ffmpeg中，添加水印需要用overlay滤镜，这是一个复杂滤镜，因为它需要两个输入，默认第一个输入是主画面，第二输入为水印，先执行一个简单的看看。<br>下面有两个文件，一个是可爱的大雄兔，一个是可爱的doggie，咱们就把doggie加到大雄兔上面去<br><img src="wm1.jpg" alt="wm1"><br>执行命令<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=0:y=0&quot; out.mp4 -y</code><br>这个命令的作用是在视频的左上角添加水印，命令中的x和y表示水印在视频中的位置，视频左上角坐标为(0,0)，向右向下延伸。<br><br>执行完成后，打开输出文件，效果如下<br><img src="wm2.jpg" alt="wm2"><br>是不是很简单？<img src="huaji.png" alt="huaji"><br>简单的看过了，下面来个稍微有一点点难度的<br></p><h4 id="如果要把水印加到右上角，怎么处理？"><a href="#如果要把水印加到右上角，怎么处理？" class="headerlink" title="如果要把水印加到右上角，怎么处理？"></a>如果要把水印加到右上角，怎么处理？</h4><p>可能有的小伙伴会说，先看看视频和图片的分辨率啊，然后算一下x，不就可以了？<br>这样当然是可以的，可是如果要批量处理不同分辨率的视频呢？这时再用上面的方法恐怕会累死人吧。<br>为了解决上面问题，再引入四个参数：</p><ul><li>main_w(W)：主画面的宽度</li><li>main_h(H)：主画面的高度</li><li>overlay_w(w)：水印宽度</li><li>overlay_h(h)：水印高度</li></ul><p>有了这四个参数，再来看上面的问题<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=W-w:y=0&quot; out.mp4 -y</code><br>上面的命令等效于<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=main_w-overlay_w:y=0&quot; out.mp4 -y</code><br>执行后，看看输出文件<br><br><img src="wm3.jpg" alt="wm3"><br>咱们的小doggie跑到右上角去了。<br>有了上面的例子，那左下角、右下角怎么放聪明的小伙伴肯定知道了吧，就不啰嗦了。<br><br>这篇只是添加一个图片作为水印，现在的视频都不会这么简单了，通常都是动态的水印，或每隔一段时间出现一次，这种下篇再讲吧，一步步来。</p><h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h2>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在ffmpeg中，添加水印需要用overlay滤镜，这是一个复杂滤镜，因为它需要两个输入，默认第一个输入是主画面，第二输入为水印，先执行一个简单的看看。&lt;br&gt;下面有两个文件，一个是可爱的大雄兔，一个是可爱的doggie，咱们就把doggie加到大雄兔上面去&lt;br&gt;&lt;img</summary>
+      
+    
+    
+    
+    
+    <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
+    
+  </entry>
   
   <entry>
     <title>ffmpeg：简单滤镜与复杂滤镜的区别</title>
@@ -33,28 +55,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>ffmpeg：为视频添加静态水印</title>
-    <link href="https://misland.github.io/2021/02/19/ffmpeg-watermark-1/"/>
-    <id>https://misland.github.io/2021/02/19/ffmpeg-watermark-1/</id>
-    <published>2021-02-19T07:02:39.000Z</published>
-    <updated>2021-02-23T03:04:42.499Z</updated>
-    
-    <content type="html"><![CDATA[<p>在ffmpeg中，添加水印需要用overlay滤镜，这是一个复杂滤镜，因为它需要两个输入，默认第一个输入是主画面，第二输入为水印，先执行一个简单的看看。<br>下面有两个文件，一个是可爱的大雄兔，一个是可爱的doggie，咱们就把doggie加到大雄兔上面去<br><img src="wm1.jpg" alt="wm1"><br>执行命令<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=0:y=0&quot; out.mp4 -y</code><br>这个命令的作用是在视频的左上角添加水印，命令中的x和y表示水印在视频中的位置，视频左上角坐标为(0,0)，向右向下延伸。<br><br>执行完成后，打开输出文件，效果如下<br><img src="wm2.jpg" alt="wm2"><br>是不是很简单？<img src="huaji.png" alt="huaji"><br>简单的看过了，下面来个稍微有一点点难度的<br></p><h4 id="如果要把水印加到右上角，怎么处理？"><a href="#如果要把水印加到右上角，怎么处理？" class="headerlink" title="如果要把水印加到右上角，怎么处理？"></a>如果要把水印加到右上角，怎么处理？</h4><p>可能有的小伙伴会说，先看看视频和图片的分辨率啊，然后算一下x，不就可以了？<br>这样当然是可以的，可是如果要批量处理不同分辨率的视频呢？这时再用上面的方法恐怕会累死人吧。<br>为了解决上面问题，再引入四个参数：</p><ul><li>main_w(W)：主画面的宽度</li><li>main_h(H)：主画面的高度</li><li>overlay_w(w)：水印宽度</li><li>overlay_h(h)：水印高度</li></ul><p>有了这四个参数，再来看上面的问题<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=W-w:y=0&quot; out.mp4 -y</code><br>上面的命令等效于<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=main_w-overlay_w:y=0&quot; out.mp4 -y</code><br>执行后，看看输出文件<br><br><img src="wm3.jpg" alt="wm3"><br>咱们的小doggie跑到右上角去了。<br>有了上面的例子，那左下角、右下角怎么放聪明的小伙伴肯定知道了吧，就不啰嗦了。<br><br>这篇只是添加一个图片作为水印，现在的视频都不会这么简单了，通常都是动态的水印，或每隔一段时间出现一次，这种下篇再讲吧，一步步来。</p><h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h2>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在ffmpeg中，添加水印需要用overlay滤镜，这是一个复杂滤镜，因为它需要两个输入，默认第一个输入是主画面，第二输入为水印，先执行一个简单的看看。&lt;br&gt;下面有两个文件，一个是可爱的大雄兔，一个是可爱的doggie，咱们就把doggie加到大雄兔上面去&lt;br&gt;&lt;img</summary>
-      
-    
-    
-    
-    
-    <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
     
   </entry>
   
