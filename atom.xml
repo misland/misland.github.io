@@ -6,7 +6,7 @@
   <link href="https://misland.github.io/atom.xml" rel="self"/>
   
   <link href="https://misland.github.io/"/>
-  <updated>2021-02-23T08:06:31.996Z</updated>
+  <updated>2021-02-24T09:28:40.973Z</updated>
   <id>https://misland.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ffmpeg第4篇：为视频添加动态水印</title>
+    <link href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/"/>
+    <id>https://misland.github.io/2021/02/24/ffmpeg-watermark-2/</id>
+    <published>2021-02-24T08:20:21.000Z</published>
+    <updated>2021-02-24T09:28:40.973Z</updated>
+    
+    <content type="html"><![CDATA[<p>动态分为三种：</p><ul><li>水印本身变化</li><li>水印显示时间变化</li><li>水印位置变化</li></ul><h2 id="水印本身变化"><a href="#水印本身变化" class="headerlink" title="水印本身变化"></a>水印本身变化</h2><p>看过<a href="http://localhost:4000/2021/02/23/ffmpeg-watermark-1/"><em>上一篇</em></a>的小伙伴可能觉得第一种很简单，把jpg格式的图片换成gif格式的不就可以了吗，然而亲自试一下就会发现，把gif图片当水印加上去后，图片播放一遍就不会动了。<br>之所以会这样是因为在ffmpeg中，水印的<code>eof_action</code>选项默认为<code>repeat</code>(参考<a href="https://ffmpeg.org/ffmpeg-filters.html#overlay-1"><em>这里</em></a>)，而<code>repeat</code>的作用是重复最后一帧，这就是为什么gif图片播放一遍就不动了的原因。</p><p>要解决这个问题，有两种方式，第一种是设置gif的<code>-ignore_loop</code>为0，让gif保持循环播放即可，命令如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -filter_complex  overlay -shortest out.mp4 -y</code><br>但是这种方式，只适用于gif格式的图像，如果滤镜是一小段视频就无能为力了。</p><p>第二种解决方案是使用movie滤镜，同样是让gif循环播放，虽然这种方式复杂点，不过这种解决方案支持视频水印，命令如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -vf &quot;movie=doggie3.gif:loop=0,setpts=N/FRAME_RATE/TB[out];[0:v][out]overlay=x=main_w-overlay_w:y=0&quot; -shortest out.mp4 -y</code><br>上面的命令有两个地方比较关键：</p><ul><li><code>loop=0,setpts=N/FRAME_RATE/TB</code> ：设置水印gif无限循环</li><li><code>-shortest</code> ：将输出文件的时长设置为第一个视频文件的时长，如果不设置，你会发现命令会一直执行根本不会停下来，因为gif图的循环是无限的</li></ul><p>这样gif图/短视频就会一直不停的播放了。</p><p>当然，如果希望水印播放一次就不播放了，那就设置上面的<code>eof_action</code>为<code>pass</code>就可以了，如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie3.gif -filter_complex &quot;overlay=x=0:y=0:eof_action=pass&quot; out.mp4 -y</code></p><p>当然，如果视频一开始就播放且只播放一次，假如水印比较短可能根本就没被注意就过去了，这时可以设置水印出现的延迟时间，使用<code>-itsoffset</code>选项，如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -itsoffset 3 -i doggie3.gif -filter_complex &quot;overlay=x=0:y=0:eof_action=pass&quot; out.mp4 -y</code><br>这样，视频播放3秒后，水印才会出现。</p><h2 id="水印显示时间变化"><a href="#水印显示时间变化" class="headerlink" title="水印显示时间变化"></a>水印显示时间变化</h2><h4 id="设置水印显示时长"><a href="#设置水印显示时长" class="headerlink" title="设置水印显示时长"></a>设置水印显示时长</h4><p><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=enable=&#39;lte(t,5)&#39;&quot; out.mp4 -y</code><br>上面命令作用是：让水印只显示5秒，5秒后消失。</p><h4 id="设置水印显示时间段"><a href="#设置水印显示时间段" class="headerlink" title="设置水印显示时间段"></a>设置水印显示时间段</h4><p><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=enable=&#39;between(t,5,10)&#39;&quot; out.mp4 -y</code><br>上面的命令作用是：让水印在视频的5~10秒时间段内显示</p><h4 id="设置两个水印轮番出现"><a href="#设置两个水印轮番出现" class="headerlink" title="设置两个水印轮番出现"></a>设置两个水印轮番出现</h4><p><code>ffmpeg -i big_buck_bunny.mp4 -i doggie1.png -i doggie2.png -filter_complex &quot;overlay=enable=&#39;lte(mod(t,10),4)&#39;,overlay=enable=&#39;gt(mod(t,10),6)&#39;&quot; out.mp4 -y</code><br>上面的命令作用是：第一个水印显示4秒后消失，2秒后第二个水印显示4秒后消失。<br>这里布置个作业？<img src="huaji.png" alt="huaji"> <strong>请让两个水印一个在左上角，一个在右上角</strong></p><h2 id="水印位置变化"><a href="#水印位置变化" class="headerlink" title="水印位置变化"></a>水印位置变化</h2><h4 id="设置水印随时间向右移动"><a href="#设置水印随时间向右移动" class="headerlink" title="设置水印随时间向右移动"></a>设置水印随时间向右移动</h4><p><code>ffmpeg -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -lavfi &quot;overlay=x=t*20&quot; -shortest out.mp4 -y</code><br>上面命令的作用是：让水印每秒向右移动20像素，直到消失。</p><h4 id="设置水印每隔10秒钟从左移动右直至消失"><a href="#设置水印每隔10秒钟从左移动右直至消失" class="headerlink" title="设置水印每隔10秒钟从左移动右直至消失"></a>设置水印每隔10秒钟从左移动右直至消失</h4><p><code> ffmpeg -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -lavfi &quot;overlay=enable=&#39;mod(t,10)&#39;:x=&#39;100*mod(t,10)-w&#39;&quot; -shortest out.mp4 -y</code><br>很实用很常见的水印展现方式有没有？<img src="huaji.png" alt="huaji">可以有效的防止别人盗视频并把水印去掉</p><p>这篇讲了三种水印活动的方式，下篇让水印转起来~<img src="huaji.png" alt="huaji"></p><h1 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h1><h1 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;动态分为三种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;水印本身变化&lt;/li&gt;
+&lt;li&gt;水印显示时间变化&lt;/li&gt;
+&lt;li&gt;水印位置变化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;水印本身变化&quot;&gt;&lt;a href=&quot;#水印本身变化&quot; class=&quot;headerlink&quot; title=&quot;水印本身</summary>
+      
+    
+    
+    
+    
+    <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
+    
+  </entry>
   
   <entry>
     <title>ffmpeg第3篇：为视频添加静态水印</title>

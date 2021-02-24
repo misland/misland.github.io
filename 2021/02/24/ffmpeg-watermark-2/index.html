@@ -55,7 +55,7 @@
     
     <title>
         
-            ffmpeg第3篇：为视频添加静态水印 | 暖宝宝官方认证铲屎官
+            ffmpeg第4篇：为视频添加动态水印 | 暖宝宝官方认证铲屎官
         
     </title>
     
@@ -205,15 +205,15 @@
     
     
       <div class="post-header"> 
-  <a class="post-header-title" href="/2021/02/23/ffmpeg-watermark-1/">ffmpeg第3篇：为视频添加静态水印</a>
+  <a class="post-header-title" href="/2021/02/24/ffmpeg-watermark-2/">ffmpeg第4篇：为视频添加动态水印</a>
   <div class="post-header-meta">
     <span>
       <span class="iconfont icon-calendar"></span>
-      发布于:&nbsp;2021-02-23
+      发布于:&nbsp;2021-02-24
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2021-02-23
+      更新于:&nbsp;2021-02-24
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -239,25 +239,25 @@
       <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
       <ul class="mdui-menu" id="share_menu">
         <li class="mdui-menu-item">
-          <a href="http://service.weibo.com/share/share.php?appkey=&title=ffmpeg第3篇：为视频添加静态水印&url=https://misland.github.io/2021/02/23/ffmpeg-watermark-1/&pic=https://misland.github.io/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=ffmpeg第4篇：为视频添加动态水印&url=https://misland.github.io/2021/02/24/ffmpeg-watermark-2/&pic=https://misland.github.io/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://twitter.com/intent/tweet?text=ffmpeg第3篇：为视频添加静态水印&url=https://misland.github.io/2021/02/23/ffmpeg-watermark-1/&via=李洛" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+          <a href="https://twitter.com/intent/tweet?text=ffmpeg第4篇：为视频添加动态水印&url=https://misland.github.io/2021/02/24/ffmpeg-watermark-2/&via=李洛" target="_blank" class="mdui-ripple">分享到 Twitter</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://misland.github.io/2021/02/23/ffmpeg-watermark-1/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://misland.github.io/2021/02/24/ffmpeg-watermark-2/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://plus.google.com/share?url=https://misland.github.io/2021/02/23/ffmpeg-watermark-1/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+          <a href="https://plus.google.com/share?url=https://misland.github.io/2021/02/24/ffmpeg-watermark-2/" target="_blank" class="mdui-ripple">分享到 Google+</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://misland.github.io/2021/02/23/ffmpeg-watermark-1/&title=ffmpeg第3篇：为视频添加静态水印" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://misland.github.io/2021/02/24/ffmpeg-watermark-2/&title=ffmpeg第4篇：为视频添加动态水印" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="http://connect.qq.com/widget/shareqq/index.html?site=暖宝宝官方认证铲屎官&title=ffmpeg第3篇：为视频添加静态水印&summary=为了暖宝宝的幸福生活而努力奋斗&pics=https://misland.github.io/images/favicon.ico&url=https://misland.github.io/2021/02/23/ffmpeg-watermark-1/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=暖宝宝官方认证铲屎官&title=ffmpeg第4篇：为视频添加动态水印&summary=为了暖宝宝的幸福生活而努力奋斗&pics=https://misland.github.io/images/favicon.ico&url=https://misland.github.io/2021/02/24/ffmpeg-watermark-2/" target="_blank" class="mdui-ripple">分享到 QQ</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://telegram.me/share/url?url=https://misland.github.io/2021/02/23/ffmpeg-watermark-1/&text=ffmpeg第3篇：为视频添加静态水印" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+          <a href="https://telegram.me/share/url?url=https://misland.github.io/2021/02/24/ffmpeg-watermark-2/&text=ffmpeg第4篇：为视频添加动态水印" target="_blank" class="mdui-ripple">分享到 Telegram</a>
         </li>
       </ul>
     
@@ -277,16 +277,29 @@
 
   
   <div class="mdui-card-content mdui-typo mdui-p-x-4">
-    <p>在ffmpeg中，添加水印需要用overlay滤镜，这是一个复杂滤镜，因为它需要两个输入，默认第一个输入是主画面，第二输入为水印，先执行一个简单的看看。<br>下面有两个文件，一个是可爱的大雄兔，一个是可爱的doggie，咱们就把doggie加到大雄兔上面去<br><img src="wm1.jpg" alt="wm1"><br>执行命令<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=0:y=0&quot; out.mp4 -y</code><br>这个命令的作用是在视频的左上角添加水印，命令中的x和y表示水印在视频中的位置，视频左上角坐标为(0,0)，向右向下延伸。<br><br>执行完成后，打开输出文件，效果如下<br><img src="wm2.jpg" alt="wm2"><br>是不是很简单？<img src="huaji.png" alt="huaji"><br>简单的看过了，下面来个稍微有一点点难度的<br></p>
-<h4 id="如果要把水印加到右上角，怎么处理？"><a href="#如果要把水印加到右上角，怎么处理？" class="headerlink" title="如果要把水印加到右上角，怎么处理？"></a>如果要把水印加到右上角，怎么处理？</h4><p>可能有的小伙伴会说，先看看视频和图片的分辨率啊，然后算一下x，不就可以了？<br>这样当然是可以的，可是如果要批量处理不同分辨率的视频呢？这时再用上面的方法恐怕会累死人吧。<br>为了解决上面问题，再引入四个参数：</p>
+    <p>动态分为三种：</p>
 <ul>
-<li>main_w(W)：主画面的宽度</li>
-<li>main_h(H)：主画面的高度</li>
-<li>overlay_w(w)：水印宽度</li>
-<li>overlay_h(h)：水印高度</li>
+<li>水印本身变化</li>
+<li>水印显示时间变化</li>
+<li>水印位置变化</li>
 </ul>
-<p>有了这四个参数，再来看上面的问题<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=W-w:y=0&quot; out.mp4 -y</code><br>上面的命令等效于<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=main_w-overlay_w:y=0&quot; out.mp4 -y</code><br>执行后，看看输出文件<br><br><img src="wm3.jpg" alt="wm3"><br>咱们的小doggie跑到右上角去了。<br>有了上面的例子，那左下角、右下角怎么放聪明的小伙伴肯定知道了吧，就不啰嗦了。<br><br>这篇只是添加一个图片作为水印，现在的视频都不会这么简单了，通常都是动态的水印，或每隔一段时间出现一次，这种下篇再讲吧，一步步来。</p>
-<h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h2>
+<h2 id="水印本身变化"><a href="#水印本身变化" class="headerlink" title="水印本身变化"></a>水印本身变化</h2><p>看过<a target="_blank" rel="noopener" href="http://localhost:4000/2021/02/23/ffmpeg-watermark-1/"><em>上一篇</em></a>的小伙伴可能觉得第一种很简单，把jpg格式的图片换成gif格式的不就可以了吗，然而亲自试一下就会发现，把gif图片当水印加上去后，图片播放一遍就不会动了。<br>之所以会这样是因为在ffmpeg中，水印的<code>eof_action</code>选项默认为<code>repeat</code>(参考<a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-filters.html#overlay-1"><em>这里</em></a>)，而<code>repeat</code>的作用是重复最后一帧，这就是为什么gif图片播放一遍就不动了的原因。</p>
+<p>要解决这个问题，有两种方式，第一种是设置gif的<code>-ignore_loop</code>为0，让gif保持循环播放即可，命令如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -filter_complex  overlay -shortest out.mp4 -y</code><br>但是这种方式，只适用于gif格式的图像，如果滤镜是一小段视频就无能为力了。</p>
+<p>第二种解决方案是使用movie滤镜，同样是让gif循环播放，虽然这种方式复杂点，不过这种解决方案支持视频水印，命令如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -vf &quot;movie=doggie3.gif:loop=0,setpts=N/FRAME_RATE/TB[out];[0:v][out]overlay=x=main_w-overlay_w:y=0&quot; -shortest out.mp4 -y</code><br>上面的命令有两个地方比较关键：</p>
+<ul>
+<li><code>loop=0,setpts=N/FRAME_RATE/TB</code> ：设置水印gif无限循环</li>
+<li><code>-shortest</code> ：将输出文件的时长设置为第一个视频文件的时长，如果不设置，你会发现命令会一直执行根本不会停下来，因为gif图的循环是无限的</li>
+</ul>
+<p>这样gif图/短视频就会一直不停的播放了。</p>
+<p>当然，如果希望水印播放一次就不播放了，那就设置上面的<code>eof_action</code>为<code>pass</code>就可以了，如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie3.gif -filter_complex &quot;overlay=x=0:y=0:eof_action=pass&quot; out.mp4 -y</code></p>
+<p>当然，如果视频一开始就播放且只播放一次，假如水印比较短可能根本就没被注意就过去了，这时可以设置水印出现的延迟时间，使用<code>-itsoffset</code>选项，如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -itsoffset 3 -i doggie3.gif -filter_complex &quot;overlay=x=0:y=0:eof_action=pass&quot; out.mp4 -y</code><br>这样，视频播放3秒后，水印才会出现。</p>
+<h2 id="水印显示时间变化"><a href="#水印显示时间变化" class="headerlink" title="水印显示时间变化"></a>水印显示时间变化</h2><h4 id="设置水印显示时长"><a href="#设置水印显示时长" class="headerlink" title="设置水印显示时长"></a>设置水印显示时长</h4><p><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=enable=&#39;lte(t,5)&#39;&quot; out.mp4 -y</code><br>上面命令作用是：让水印只显示5秒，5秒后消失。</p>
+<h4 id="设置水印显示时间段"><a href="#设置水印显示时间段" class="headerlink" title="设置水印显示时间段"></a>设置水印显示时间段</h4><p><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=enable=&#39;between(t,5,10)&#39;&quot; out.mp4 -y</code><br>上面的命令作用是：让水印在视频的5~10秒时间段内显示</p>
+<h4 id="设置两个水印轮番出现"><a href="#设置两个水印轮番出现" class="headerlink" title="设置两个水印轮番出现"></a>设置两个水印轮番出现</h4><p><code>ffmpeg -i big_buck_bunny.mp4 -i doggie1.png -i doggie2.png -filter_complex &quot;overlay=enable=&#39;lte(mod(t,10),4)&#39;,overlay=enable=&#39;gt(mod(t,10),6)&#39;&quot; out.mp4 -y</code><br>上面的命令作用是：第一个水印显示4秒后消失，2秒后第二个水印显示4秒后消失。<br>这里布置个作业？<img src="huaji.png" alt="huaji"> <strong>请让两个水印一个在左上角，一个在右上角</strong></p>
+<h2 id="水印位置变化"><a href="#水印位置变化" class="headerlink" title="水印位置变化"></a>水印位置变化</h2><h4 id="设置水印随时间向右移动"><a href="#设置水印随时间向右移动" class="headerlink" title="设置水印随时间向右移动"></a>设置水印随时间向右移动</h4><p><code>ffmpeg -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -lavfi &quot;overlay=x=t*20&quot; -shortest out.mp4 -y</code><br>上面命令的作用是：让水印每秒向右移动20像素，直到消失。</p>
+<h4 id="设置水印每隔10秒钟从左移动右直至消失"><a href="#设置水印每隔10秒钟从左移动右直至消失" class="headerlink" title="设置水印每隔10秒钟从左移动右直至消失"></a>设置水印每隔10秒钟从左移动右直至消失</h4><p><code> ffmpeg -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -lavfi &quot;overlay=enable=&#39;mod(t,10)&#39;:x=&#39;100*mod(t,10)-w&#39;&quot; -shortest out.mp4 -y</code><br>很实用很常见的水印展现方式有没有？<img src="huaji.png" alt="huaji">可以有效的防止别人盗视频并把水印去掉</p>
+<p>这篇讲了三种水印活动的方式，下篇让水印转起来~<img src="huaji.png" alt="huaji"></p>
+<h1 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h1><h1 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h1>
   </div>
   <!--文末结束语-->
   
@@ -298,14 +311,9 @@
   
   <nav>
     
-      <a rel="prev" class="post-nav-item mdui-float-left" href="/2021/02/24/ffmpeg-watermark-2/">
-        <i class="iconfont icon-angle-left"></i>
-        <span>ffmpeg第4篇：为视频添加动态水印</span>
-      </a>
     
-    
-      <a rel="next" class="post-nav-item mdui-float-right" href="/2021/02/19/ffmpeg-filter/">
-        <span>ffmpeg第2篇：简单滤镜与复杂滤镜的区别</span>
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2021/02/23/ffmpeg-watermark-1/">
+        <span>ffmpeg第3篇：为视频添加静态水印</span>
         <i class="iconfont icon-angle-right"></i>
       </a>
     
@@ -319,8 +327,8 @@
     <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
     <ul class="mdui-menu" id="toc">
       <li class="mdui-menu-item">
-        <a href="/2021/02/23/ffmpeg-watermark-1/" id="toc-header" class="mdui-ripple">文章目录</a>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E8%A6%81%E6%8A%8A%E6%B0%B4%E5%8D%B0%E5%8A%A0%E5%88%B0%E5%8F%B3%E4%B8%8A%E8%A7%92%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">如果要把水印加到右上角，怎么处理？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E9%97%AE%E9%A2%98%E8%AF%B7%E7%95%99%E8%A8%80%E6%B2%9F%E9%80%9A%EF%BC%8C%E6%AC%A2%E8%BF%8E%E8%BD%AC%E8%BD%BD%EF%BC%8C%E8%BD%AC%E8%BD%BD%E8%AF%B7%E6%B3%A8%E6%98%8E%E5%87%BA%E5%A4%84"><span class="toc-number"></span> <span class="toc-text">有问题请留言沟通，欢迎转载，转载请注明出处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%9C%B0%E5%9D%80%EF%BC%9A%E6%9A%96%E5%AE%9D%E5%AE%9D%E5%AE%98%E6%96%B9%E8%AE%A4%E8%AF%81%E9%93%B2%E5%B1%8E%E5%AE%98"><span class="toc-number"></span> <span class="toc-text">博客地址：暖宝宝官方认证铲屎官</span></a>
+        <a href="/2021/02/24/ffmpeg-watermark-2/" id="toc-header" class="mdui-ripple">文章目录</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B4%E5%8D%B0%E6%9C%AC%E8%BA%AB%E5%8F%98%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">水印本身变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B4%E5%8D%B0%E6%98%BE%E7%A4%BA%E6%97%B6%E9%97%B4%E5%8F%98%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">水印显示时间变化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B0%B4%E5%8D%B0%E6%98%BE%E7%A4%BA%E6%97%B6%E9%95%BF"><span class="toc-number">2.0.1.</span> <span class="toc-text">设置水印显示时长</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B0%B4%E5%8D%B0%E6%98%BE%E7%A4%BA%E6%97%B6%E9%97%B4%E6%AE%B5"><span class="toc-number">2.0.2.</span> <span class="toc-text">设置水印显示时间段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AA%E6%B0%B4%E5%8D%B0%E8%BD%AE%E7%95%AA%E5%87%BA%E7%8E%B0"><span class="toc-number">2.0.3.</span> <span class="toc-text">设置两个水印轮番出现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B4%E5%8D%B0%E4%BD%8D%E7%BD%AE%E5%8F%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">水印位置变化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B0%B4%E5%8D%B0%E9%9A%8F%E6%97%B6%E9%97%B4%E5%90%91%E5%8F%B3%E7%A7%BB%E5%8A%A8"><span class="toc-number">3.0.1.</span> <span class="toc-text">设置水印随时间向右移动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B0%B4%E5%8D%B0%E6%AF%8F%E9%9A%9410%E7%A7%92%E9%92%9F%E4%BB%8E%E5%B7%A6%E7%A7%BB%E5%8A%A8%E5%8F%B3%E7%9B%B4%E8%87%B3%E6%B6%88%E5%A4%B1"><span class="toc-number">3.0.2.</span> <span class="toc-text">设置水印每隔10秒钟从左移动右直至消失</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E9%97%AE%E9%A2%98%E8%AF%B7%E7%95%99%E8%A8%80%E6%B2%9F%E9%80%9A%EF%BC%8C%E6%AC%A2%E8%BF%8E%E8%BD%AC%E8%BD%BD%EF%BC%8C%E8%BD%AC%E8%BD%BD%E8%AF%B7%E6%B3%A8%E6%98%8E%E5%87%BA%E5%A4%84"><span class="toc-number"></span> <span class="toc-text">有问题请留言沟通，欢迎转载，转载请注明出处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%9C%B0%E5%9D%80%EF%BC%9A%E6%9A%96%E5%AE%9D%E5%AE%9D%E5%AE%98%E6%96%B9%E8%AE%A4%E8%AF%81%E9%93%B2%E5%B1%8E%E5%AE%98"><span class="toc-number"></span> <span class="toc-text">博客地址：暖宝宝官方认证铲屎官</span></a>
       </li>
     </ul>
   </div>
