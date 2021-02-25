@@ -6,7 +6,7 @@
   <link href="https://misland.github.io/atom.xml" rel="self"/>
   
   <link href="https://misland.github.io/"/>
-  <updated>2021-02-24T09:28:40.973Z</updated>
+  <updated>2021-02-25T06:00:05.243Z</updated>
   <id>https://misland.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ffmpeg番外篇：听说这款水印曾经在某音很火？办它！</title>
+    <link href="https://misland.github.io/2021/02/25/ffmpeg-watermark-3/"/>
+    <id>https://misland.github.io/2021/02/25/ffmpeg-watermark-3/</id>
+    <published>2021-02-25T05:42:40.000Z</published>
+    <updated>2021-02-25T06:00:05.243Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在瞎逛时，偶然看到一个<a href="https://blog.csdn.net/JemyCheung/article/details/88413005"><em>CSDN</em></a>上的哥们说，他们曾经被一个水印难住了，仔细看了下，感觉可以用一行命令实现。<br>需求如下：<strong>视频加gif水印，gif循环，同时n秒后水印切换位置继续循环</strong><br>这哥们遇到了两个问题：<br>1、gif图无法自动循环<br>2、根据时间轮番切换水印位置<br>下面是具体的实现命令<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -filter_complex &quot;overlay=y=&#39;if(lte(mod(t,4),2),0,H-h)&#39;&quot; -shortest out.mp4 -y</code><br>效果如下<br><img src="wm_mod.gif" alt="wm"></p><p>有需要的拿去使用吧~<br>另外想问下审核大神，这种别人搞不出来的，我搞出来了，算不算知识分享呢？有资格在首页展示吗？</p><h1 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h1><h1 id="欢迎点击个人博客地址：暖宝宝官方认证铲屎官"><a href="#欢迎点击个人博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="欢迎点击个人博客地址：暖宝宝官方认证铲屎官"></a>欢迎点击个人博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;今天在瞎逛时，偶然看到一个&lt;a href=&quot;https://blog.csdn.net/JemyCheung/article/details/88413005&quot;&gt;&lt;em&gt;CSDN&lt;/em&gt;&lt;/a&gt;上的哥们说，他们曾经被一个水印难住了，仔细看了下，感觉可以用一行命令实现。&lt;b</summary>
+      
+    
+    
+    
+    
+    <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
+    
+  </entry>
   
   <entry>
     <title>ffmpeg第4篇：为视频添加动态水印</title>
