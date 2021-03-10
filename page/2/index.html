@@ -48,6 +48,62 @@
 
 
 
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
           
 
 
@@ -201,61 +257,64 @@
   
   <main id="main-contain" class="mdui-container mdui-m-t-5">
     
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
+  <a class="post-header-title" href="/2020/11/03/android-camera/">Couldn&#39;t get file path for photo on ANDROID 10</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      发布于:&nbsp;2020-11-03
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      更新于:&nbsp;2021-02-18
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      分类于:&nbsp;<a class="category-link" href="/categories/Android/">Android</a>
+    </span>
+    
+  </div>
+</div>   
+    
 
-<div class="mdui-card mdui-p-a-4 mdui-m-b-5">
-    <div class="page-describe">
-        目前共计 11 篇日志。
+
+
+      
+      
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/React-Native/ >React Native</a>
+      </i>
+    
+  </div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <p>昨天在使用RN的react-native-image-picker（v2.3.4）组件时遇到了一个问题，通过yarn添加组件后，根据文档导入变量并调用相机拍照</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ImagePicker <span class="keyword">from</span> <span class="string">&#x27;react-native-image-picker&#x27;</span>;</span><br><span class="line">cameraOperation() &#123;</span><br><span class="line">    <span class="keyword">const</span> options = &#123;</span><br><span class="line">      title: <span class="string">&#x27;Take a photo&#x27;</span>,</span><br><span class="line">      <span class="comment">//自定义按钮，目前没发现有什么用</span></span><br><span class="line">      customButtons: [&#123; <span class="attr">name</span>: <span class="string">&#x27;fb&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;Choose photo from Facebook&#x27;</span> &#125;],</span><br><span class="line">      storageOptions: &#123;</span><br><span class="line">        skipBackup: <span class="literal">true</span>,</span><br><span class="line">        path: <span class="string">&#x27;images&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    ImagePicker.showImagePicker(options, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//path：图片的存储路径</span></span><br><span class="line">      <span class="comment">//uri：在当前app内的存储路径</span></span><br><span class="line">      <span class="comment">//width、height：拿到的图片的宽高</span></span><br><span class="line">      <span class="comment">//data：图片的base64格式数据</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;Response = &#x27;</span>, response);</span><br><span class="line">      <span class="keyword">if</span> (response.didCancel) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User cancled image picker&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">&#x27;ImagePicker error:&#x27;</span>, response.error);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (response.customButton) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;User tapped custom button:&#x27;</span>, response.customButton);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(response.uri);</span><br><span class="line">        <span class="keyword">const</span> source = &#123; <span class="attr">uri</span>: response.uri &#125;;</span><br><span class="line">        <span class="built_in">this</span>.setState(&#123; <span class="attr">avatarSource</span>: source &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>然而在运行时，却抛出了标题所述的错误，开始不得其解，后来搜索了一下资料，原来是因为API29的原因，API29对应的安卓版本是Android10，而Android中引入了分区存储（Scoped storage）的概念，这样做的初衷是为了避免APP乱写文件从而产生很多乱七八糟的冗余文件，更好的保护用户数据，具体的介绍可以看这里（<a target="_blank" rel="noopener" href="https://juejin.im/post/6844904063432130568">传送门</a>）<br></p>
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2020/11/03/android-camera/">阅读更多</a>
+        </div>
+      </div>
+    </article>
+
+
+
+  <nav style="text-align: center;">
+    <div class="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </div>
-    <div class="posts-collapse">
-        
-            
-            
-                <div class="collection-title">
-                    <a href="/archives/2020"><h2>2020<small>归档</small></h2></a>
-                </div>
-                
-            
-
-            <div class="collection-item">
-                <h3><a href="/2020/12/01/handlerMapping/">springboot源码解析-@RequestMapping是怎么工作的</a></h3>
-                <time itemprop="dateCreated" datetime=2020-12-01 >
-                    2020.12.01
-                </time>
-            </div>
-        
-            
-            
-
-            <div class="collection-item">
-                <h3><a href="/2020/11/30/20201127/">使用Idea新建Springboot项目，整合jsp</a></h3>
-                <time itemprop="dateCreated" datetime=2020-11-30 >
-                    2020.11.30
-                </time>
-            </div>
-        
-            
-            
-
-            <div class="collection-item">
-                <h3><a href="/2020/11/09/ubuntu-systemback/">使用Systemback制做Ubuntu18.04镜像</a></h3>
-                <time itemprop="dateCreated" datetime=2020-11-09 >
-                    2020.11.09
-                </time>
-            </div>
-        
-            
-            
-
-            <div class="collection-item">
-                <h3><a href="/2020/11/03/android-camera/">Couldn&#39;t get file path for photo on ANDROID 10</a></h3>
-                <time itemprop="dateCreated" datetime=2020-11-03 >
-                    2020.11.03
-                </time>
-            </div>
-        
-    </div>
-</div>
-
+  </nav>
 
   </main>
   <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">

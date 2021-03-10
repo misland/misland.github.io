@@ -55,7 +55,7 @@
     
     <title>
         
-            使用nodejs编码/解码base64格式文件 | 暖宝宝官方认证铲屎官
+            nodejs中处理十六进制 | 暖宝宝官方认证铲屎官
         
     </title>
     
@@ -205,15 +205,15 @@
     
     
       <div class="post-header"> 
-  <a class="post-header-title" href="/2021/03/09/nodejs-base64/">使用nodejs编码/解码base64格式文件</a>
+  <a class="post-header-title" href="/2021/03/10/nodejs-buffer-hex/">nodejs中处理十六进制</a>
   <div class="post-header-meta">
     <span>
       <span class="iconfont icon-calendar"></span>
-      发布于:&nbsp;2021-03-09
+      发布于:&nbsp;2021-03-10
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2021-03-09
+      更新于:&nbsp;2021-03-10
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -239,25 +239,25 @@
       <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
       <ul class="mdui-menu" id="share_menu">
         <li class="mdui-menu-item">
-          <a href="http://service.weibo.com/share/share.php?appkey=&title=使用nodejs编码/解码base64格式文件&url=https://misland.github.io/2021/03/09/nodejs-base64/&pic=https://misland.github.io/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=nodejs中处理十六进制&url=https://misland.github.io/2021/03/10/nodejs-buffer-hex/&pic=https://misland.github.io/images/favicon.ico&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://twitter.com/intent/tweet?text=使用nodejs编码/解码base64格式文件&url=https://misland.github.io/2021/03/09/nodejs-base64/&via=李洛" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+          <a href="https://twitter.com/intent/tweet?text=nodejs中处理十六进制&url=https://misland.github.io/2021/03/10/nodejs-buffer-hex/&via=李洛" target="_blank" class="mdui-ripple">分享到 Twitter</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://misland.github.io/2021/03/09/nodejs-base64/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://misland.github.io/2021/03/10/nodejs-buffer-hex/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://plus.google.com/share?url=https://misland.github.io/2021/03/09/nodejs-base64/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+          <a href="https://plus.google.com/share?url=https://misland.github.io/2021/03/10/nodejs-buffer-hex/" target="_blank" class="mdui-ripple">分享到 Google+</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://misland.github.io/2021/03/09/nodejs-base64/&title=使用nodejs编码/解码base64格式文件" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://misland.github.io/2021/03/10/nodejs-buffer-hex/&title=nodejs中处理十六进制" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="http://connect.qq.com/widget/shareqq/index.html?site=暖宝宝官方认证铲屎官&title=使用nodejs编码/解码base64格式文件&summary=为了暖宝宝的幸福生活而努力奋斗&pics=https://misland.github.io/images/favicon.ico&url=https://misland.github.io/2021/03/09/nodejs-base64/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=暖宝宝官方认证铲屎官&title=nodejs中处理十六进制&summary=为了暖宝宝的幸福生活而努力奋斗&pics=https://misland.github.io/images/favicon.ico&url=https://misland.github.io/2021/03/10/nodejs-buffer-hex/" target="_blank" class="mdui-ripple">分享到 QQ</a>
         </li>
         <li class="mdui-menu-item">
-          <a href="https://telegram.me/share/url?url=https://misland.github.io/2021/03/09/nodejs-base64/&text=使用nodejs编码/解码base64格式文件" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+          <a href="https://telegram.me/share/url?url=https://misland.github.io/2021/03/10/nodejs-buffer-hex/&text=nodejs中处理十六进制" target="_blank" class="mdui-ripple">分享到 Telegram</a>
         </li>
       </ul>
     
@@ -277,10 +277,21 @@
 
   
   <div class="mdui-card-content mdui-typo mdui-p-x-4">
-    <p>本来这么点事情，根本不值得写篇文章，无奈心中想吐槽，于是这篇没什么大用的文章就出来了<br>为什么想吐槽呢，因为偶尔需要使用这个功能，在bing一搜，嗨，出来的文章都是一个样，都是用一个字符串，先转成base64格式的，然后再转回正常的utf8格式<br>而我的需求是要把一个base64格式的txt文件，还原成初始格式，看了好一会儿也没懂，真是醉了，最后自己试了一下，改了一些参数可以了<br>不过回头想想，看的的CSDN上的“大神”的文章，也就释然了~</p>
-<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种方法：先将文件转为二进制，再转为base64，这种方式不推荐，代码执行效率低</span></span><br><span class="line"><span class="keyword">let</span> vod = fs.readFileSync(<span class="string">&#x27;source.mp4&#x27;</span>); <span class="comment">//readFileSync默认编码参数为null</span></span><br><span class="line"><span class="keyword">let</span> base64String = Buffer.from(vod, <span class="string">&#x27;binary&#x27;</span>).toString(<span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line">fs.writeFileSync(<span class="string">&#x27;vod_base64.txt&#x27;</span>, base64String);</span><br><span class="line"></span><br><span class="line"><span class="comment">//第二种方式，直接以base64格式读取文件，推荐这种方式，读取过程中直接转换，代码执行效率高</span></span><br><span class="line"><span class="keyword">let</span> vod = fs.readFileSync(<span class="string">&#x27;source.mp4&#x27;</span>, <span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line">fs.writeFileSync(<span class="string">&#x27;vod_base64.txt&#x27;</span>, Buffer.from(vod));</span><br></pre></td></tr></table></figure>
+    <p>有时候吧，与硬件交互时，常常需要用十六进制来通信，下面罗列一些简单操作</p>
+<h2 id="整型之间互转"><a href="#整型之间互转" class="headerlink" title="整型之间互转"></a>整型之间互转</h2><p>十进制转十六进制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">100</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">16</span>));<span class="comment">// 64</span></span><br></pre></td></tr></table></figure>
+<p>十六进制转十进制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0x100</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">10</span>));<span class="comment">// 256</span></span><br></pre></td></tr></table></figure>
+<p>用toString来进行转换，其它进制也是同样的操作</p>
+<h2 id="整型与Buffer互转"><a href="#整型与Buffer互转" class="headerlink" title="整型与Buffer互转"></a>整型与Buffer互转</h2><h4 id="整型转Buffer"><a href="#整型转Buffer" class="headerlink" title="整型转Buffer"></a>整型转Buffer</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0xA5AB</span>;</span><br><span class="line"><span class="built_in">console</span>.log(Buffer.alloc(<span class="number">2</span>, num.toString(<span class="number">16</span>), <span class="string">&#x27;hex&#x27;</span>));<span class="comment">// &lt;Buffer a5 ab&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(Buffer.from(num.toString(<span class="number">16</span>), <span class="string">&#x27;hex&#x27;</span>));<span class="comment">// &lt;Buffer a5 ab&gt;</span></span><br></pre></td></tr></table></figure>
+<p>两种方式均可以转换成希望的结果<br>再看一个例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0x0400</span>;</span><br><span class="line"><span class="built_in">console</span>.log(Buffer.alloc(<span class="number">2</span>, num, <span class="string">&#x27;hex&#x27;</span>));<span class="comment">// &lt;Buffer 00 00&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(Buffer.from(num.toString(<span class="number">16</span>), <span class="string">&#x27;hex&#x27;</span>));<span class="comment">// &lt;Buffer 40&gt;</span></span><br></pre></td></tr></table></figure>
+<p>两种方式的输出都不对，这是因为第一位为0，buffer接收时是按0x400接收的，所以就出现了上面的情况，为了能正常转换为两个字节，只能自己处理一下了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0x0400</span>;</span><br><span class="line"><span class="built_in">console</span>.log(Buffer.alloc(<span class="number">2</span>, <span class="string">`0<span class="subst">$&#123;num.toString(<span class="number">16</span>)&#125;</span>`</span>, <span class="string">&#x27;hex&#x27;</span>));<span class="comment">// &lt;Buffer 04 00&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(Buffer.from(<span class="string">`0<span class="subst">$&#123;num.toString(<span class="number">16</span>)&#125;</span>`</span>, <span class="string">&#x27;hex&#x27;</span>));<span class="comment">// &lt;Buffer 04 00&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这时能正常转换</p>
+<h4 id="Buffer转整型"><a href="#Buffer转整型" class="headerlink" title="Buffer转整型"></a>Buffer转整型</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0x0400</span>;</span><br><span class="line"><span class="keyword">let</span> tem = Buffer.from(<span class="string">`0<span class="subst">$&#123;num.toString(<span class="number">16</span>)&#125;</span>`</span>, <span class="string">&#x27;hex&#x27;</span>).toString(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">`0x<span class="subst">$&#123;tem&#125;</span>`</span>));<span class="comment">// 1024</span></span><br></pre></td></tr></table></figure>
+<p>这样即可</p>
 
-<h2 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先以二进制格式读取文件base64格式内容，再以base64格式加载到Buffer中，然后再写入到目标文件，即可得到初始格式文件</span></span><br><span class="line"><span class="keyword">let</span> encode = fs.readFileSync(<span class="string">&#x27;vod_base64.txt&#x27;</span>, <span class="string">&#x27;binary&#x27;</span>);</span><br><span class="line">fs.writeFileSync(<span class="string">&#x27;decode.mp4&#x27;</span>, Buffer.from(encode, <span class="string">&#x27;base64&#x27;</span>));</span><br></pre></td></tr></table></figure>
   </div>
   <!--文末结束语-->
   
@@ -292,14 +303,9 @@
   
   <nav>
     
-      <a rel="prev" class="post-nav-item mdui-float-left" href="/2021/03/10/nodejs-buffer-hex/">
-        <i class="iconfont icon-angle-left"></i>
-        <span>nodejs中处理十六进制</span>
-      </a>
     
-    
-      <a rel="next" class="post-nav-item mdui-float-right" href="/2021/02/25/ffmpeg-watermark-3/">
-        <span>ffmpeg番外篇：听说这款水印曾经在某音很火？办它！</span>
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2021/03/09/nodejs-base64/">
+        <span>使用nodejs编码/解码base64格式文件</span>
         <i class="iconfont icon-angle-right"></i>
       </a>
     
@@ -313,8 +319,8 @@
     <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
     <ul class="mdui-menu" id="toc">
       <li class="mdui-menu-item">
-        <a href="/2021/03/09/nodejs-base64/" id="toc-header" class="mdui-ripple">文章目录</a>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">解码</span></a></li></ol>
+        <a href="/2021/03/10/nodejs-buffer-hex/" id="toc-header" class="mdui-ripple">文章目录</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B%E4%B9%8B%E9%97%B4%E4%BA%92%E8%BD%AC"><span class="toc-number">1.</span> <span class="toc-text">整型之间互转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B%E4%B8%8EBuffer%E4%BA%92%E8%BD%AC"><span class="toc-number">2.</span> <span class="toc-text">整型与Buffer互转</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B%E8%BD%ACBuffer"><span class="toc-number">2.0.1.</span> <span class="toc-text">整型转Buffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Buffer%E8%BD%AC%E6%95%B4%E5%9E%8B"><span class="toc-number">2.0.2.</span> <span class="toc-text">Buffer转整型</span></a></li></ol></li></ol></li></ol>
       </li>
     </ul>
   </div>
