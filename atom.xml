@@ -70,7 +70,7 @@
     <link href="https://misland.github.io/2021/02/25/ffmpeg-watermark-3/"/>
     <id>https://misland.github.io/2021/02/25/ffmpeg-watermark-3/</id>
     <published>2021-02-25T05:42:40.000Z</published>
-    <updated>2021-03-09T09:06:25.064Z</updated>
+    <updated>2021-03-11T02:33:56.008Z</updated>
     
     <content type="html"><![CDATA[<p>今天在瞎逛时，偶然看到一个<a href="https://blog.csdn.net/JemyCheung/article/details/88413005"><em>CSDN</em></a>上的哥们说，他们曾经被一个水印难住了，仔细看了下，感觉可以用一行命令实现。<br>需求如下：<strong>视频加gif水印，gif循环，同时n秒后水印切换位置继续循环</strong><br>这哥们遇到了两个问题：<br>1、gif图无法自动循环<br>2、根据时间轮番切换水印位置<br>下面是具体的实现命令<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -filter_complex &quot;overlay=y=&#39;if(lte(mod(t,4),2),0,H-h)&#39;&quot; -shortest out.mp4 -y</code><br>效果如下<br><img src="wm_mod.gif" alt="wm"></p><p>有需要的拿去使用吧~</p><h1 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h1><h1 id="欢迎点击个人博客地址：暖宝宝官方认证铲屎官"><a href="#欢迎点击个人博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="欢迎点击个人博客地址：暖宝宝官方认证铲屎官"></a>欢迎点击个人博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h1>]]></content>
     
@@ -82,6 +82,8 @@
     
     
     
+    <category term="ffmpeg" scheme="https://misland.github.io/categories/ffmpeg/"/>
+    
     
     <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
     
@@ -92,7 +94,7 @@
     <link href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/"/>
     <id>https://misland.github.io/2021/02/24/ffmpeg-watermark-2/</id>
     <published>2021-02-24T08:20:21.000Z</published>
-    <updated>2021-02-24T09:28:40.973Z</updated>
+    <updated>2021-03-11T02:33:53.003Z</updated>
     
     <content type="html"><![CDATA[<p>动态分为三种：</p><ul><li>水印本身变化</li><li>水印显示时间变化</li><li>水印位置变化</li></ul><h2 id="水印本身变化"><a href="#水印本身变化" class="headerlink" title="水印本身变化"></a>水印本身变化</h2><p>看过<a href="http://localhost:4000/2021/02/23/ffmpeg-watermark-1/"><em>上一篇</em></a>的小伙伴可能觉得第一种很简单，把jpg格式的图片换成gif格式的不就可以了吗，然而亲自试一下就会发现，把gif图片当水印加上去后，图片播放一遍就不会动了。<br>之所以会这样是因为在ffmpeg中，水印的<code>eof_action</code>选项默认为<code>repeat</code>(参考<a href="https://ffmpeg.org/ffmpeg-filters.html#overlay-1"><em>这里</em></a>)，而<code>repeat</code>的作用是重复最后一帧，这就是为什么gif图片播放一遍就不动了的原因。</p><p>要解决这个问题，有两种方式，第一种是设置gif的<code>-ignore_loop</code>为0，让gif保持循环播放即可，命令如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -filter_complex  overlay -shortest out.mp4 -y</code><br>但是这种方式，只适用于gif格式的图像，如果滤镜是一小段视频就无能为力了。</p><p>第二种解决方案是使用movie滤镜，同样是让gif循环播放，虽然这种方式复杂点，不过这种解决方案支持视频水印，命令如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -vf &quot;movie=doggie3.gif:loop=0,setpts=N/FRAME_RATE/TB[out];[0:v][out]overlay=x=main_w-overlay_w:y=0&quot; -shortest out.mp4 -y</code><br>上面的命令有两个地方比较关键：</p><ul><li><code>loop=0,setpts=N/FRAME_RATE/TB</code> ：设置水印gif无限循环</li><li><code>-shortest</code> ：将输出文件的时长设置为第一个视频文件的时长，如果不设置，你会发现命令会一直执行根本不会停下来，因为gif图的循环是无限的</li></ul><p>这样gif图/短视频就会一直不停的播放了。</p><p>当然，如果希望水印播放一次就不播放了，那就设置上面的<code>eof_action</code>为<code>pass</code>就可以了，如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie3.gif -filter_complex &quot;overlay=x=0:y=0:eof_action=pass&quot; out.mp4 -y</code></p><p>当然，如果视频一开始就播放且只播放一次，假如水印比较短可能根本就没被注意就过去了，这时可以设置水印出现的延迟时间，使用<code>-itsoffset</code>选项，如下：<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -itsoffset 3 -i doggie3.gif -filter_complex &quot;overlay=x=0:y=0:eof_action=pass&quot; out.mp4 -y</code><br>这样，视频播放3秒后，水印才会出现。</p><h2 id="水印显示时间变化"><a href="#水印显示时间变化" class="headerlink" title="水印显示时间变化"></a>水印显示时间变化</h2><h4 id="设置水印显示时长"><a href="#设置水印显示时长" class="headerlink" title="设置水印显示时长"></a>设置水印显示时长</h4><p><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=enable=&#39;lte(t,5)&#39;&quot; out.mp4 -y</code><br>上面命令作用是：让水印只显示5秒，5秒后消失。</p><h4 id="设置水印显示时间段"><a href="#设置水印显示时间段" class="headerlink" title="设置水印显示时间段"></a>设置水印显示时间段</h4><p><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=enable=&#39;between(t,5,10)&#39;&quot; out.mp4 -y</code><br>上面的命令作用是：让水印在视频的5~10秒时间段内显示</p><h4 id="设置两个水印轮番出现"><a href="#设置两个水印轮番出现" class="headerlink" title="设置两个水印轮番出现"></a>设置两个水印轮番出现</h4><p><code>ffmpeg -i big_buck_bunny.mp4 -i doggie1.png -i doggie2.png -filter_complex &quot;overlay=enable=&#39;lte(mod(t,10),4)&#39;,overlay=enable=&#39;gt(mod(t,10),6)&#39;&quot; out.mp4 -y</code><br>上面的命令作用是：第一个水印显示4秒后消失，2秒后第二个水印显示4秒后消失。<br>这里布置个作业？<img src="huaji.png" alt="huaji"> <strong>请让两个水印一个在左上角，一个在右上角</strong></p><h2 id="水印位置变化"><a href="#水印位置变化" class="headerlink" title="水印位置变化"></a>水印位置变化</h2><h4 id="设置水印随时间向右移动"><a href="#设置水印随时间向右移动" class="headerlink" title="设置水印随时间向右移动"></a>设置水印随时间向右移动</h4><p><code>ffmpeg -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -lavfi &quot;overlay=x=t*20&quot; -shortest out.mp4 -y</code><br>上面命令的作用是：让水印每秒向右移动20像素，直到消失。</p><h4 id="设置水印每隔10秒钟从左移动右直至消失"><a href="#设置水印每隔10秒钟从左移动右直至消失" class="headerlink" title="设置水印每隔10秒钟从左移动右直至消失"></a>设置水印每隔10秒钟从左移动右直至消失</h4><p><code> ffmpeg -i big_buck_bunny.mp4 -ignore_loop 0 -i doggie3.gif -lavfi &quot;overlay=enable=&#39;mod(t,10)&#39;:x=&#39;100*mod(t,10)-w&#39;&quot; -shortest out.mp4 -y</code><br>很实用很常见的水印展现方式有没有？<img src="huaji.png" alt="huaji">可以有效的防止别人盗视频并把水印去掉</p><p>这篇讲了三种水印活动的方式，下篇让水印转起来~<img src="huaji.png" alt="huaji"></p><h1 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h1><h1 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h1>]]></content>
     
@@ -110,6 +112,8 @@
     
     
     
+    <category term="ffmpeg" scheme="https://misland.github.io/categories/ffmpeg/"/>
+    
     
     <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
     
@@ -120,7 +124,7 @@
     <link href="https://misland.github.io/2021/02/23/ffmpeg-watermark-1/"/>
     <id>https://misland.github.io/2021/02/23/ffmpeg-watermark-1/</id>
     <published>2021-02-23T07:02:39.000Z</published>
-    <updated>2021-02-23T08:06:31.996Z</updated>
+    <updated>2021-03-11T02:33:47.609Z</updated>
     
     <content type="html"><![CDATA[<p>在ffmpeg中，添加水印需要用overlay滤镜，这是一个复杂滤镜，因为它需要两个输入，默认第一个输入是主画面，第二输入为水印，先执行一个简单的看看。<br>下面有两个文件，一个是可爱的大雄兔，一个是可爱的doggie，咱们就把doggie加到大雄兔上面去<br><img src="wm1.jpg" alt="wm1"><br>执行命令<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=0:y=0&quot; out.mp4 -y</code><br>这个命令的作用是在视频的左上角添加水印，命令中的x和y表示水印在视频中的位置，视频左上角坐标为(0,0)，向右向下延伸。<br><br>执行完成后，打开输出文件，效果如下<br><img src="wm2.jpg" alt="wm2"><br>是不是很简单？<img src="huaji.png" alt="huaji"><br>简单的看过了，下面来个稍微有一点点难度的<br></p><h4 id="如果要把水印加到右上角，怎么处理？"><a href="#如果要把水印加到右上角，怎么处理？" class="headerlink" title="如果要把水印加到右上角，怎么处理？"></a>如果要把水印加到右上角，怎么处理？</h4><p>可能有的小伙伴会说，先看看视频和图片的分辨率啊，然后算一下x，不就可以了？<br>这样当然是可以的，可是如果要批量处理不同分辨率的视频呢？这时再用上面的方法恐怕会累死人吧。<br>为了解决上面问题，再引入四个参数：</p><ul><li>main_w(W)：主画面的宽度</li><li>main_h(H)：主画面的高度</li><li>overlay_w(w)：水印宽度</li><li>overlay_h(h)：水印高度</li></ul><p>有了这四个参数，再来看上面的问题<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=W-w:y=0&quot; out.mp4 -y</code><br>上面的命令等效于<br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=main_w-overlay_w:y=0&quot; out.mp4 -y</code><br>执行后，看看输出文件<br><br><img src="wm3.jpg" alt="wm3"><br>咱们的小doggie跑到右上角去了。<br>有了上面的例子，那左下角、右下角怎么放聪明的小伙伴肯定知道了吧，就不啰嗦了。<br><br>这篇只是添加一个图片作为水印，现在的视频都不会这么简单了，通常都是动态的水印，或每隔一段时间出现一次，这种下篇再讲吧，一步步来。</p><h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h2>]]></content>
     
@@ -132,6 +136,8 @@
     
     
     
+    <category term="ffmpeg" scheme="https://misland.github.io/categories/ffmpeg/"/>
+    
     
     <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
     
@@ -142,7 +148,7 @@
     <link href="https://misland.github.io/2021/02/19/ffmpeg-filter/"/>
     <id>https://misland.github.io/2021/02/19/ffmpeg-filter/</id>
     <published>2021-02-19T08:33:40.000Z</published>
-    <updated>2021-02-23T08:06:27.164Z</updated>
+    <updated>2021-03-11T02:34:36.619Z</updated>
     
     <content type="html"><![CDATA[<p>在ffmpeg的滤镜中，有简单滤镜（simple filter）和复杂滤镜（complex filter）两种。<br><br>使用简单滤镜时，用<code>-vf</code>选项，使用复杂滤镜时，使用<code>-filter_complex</code>或<code>-lavfi</code>。<br>那么什么时候用简单滤镜，什么时候用复杂滤镜？<br><br>其实很简单：<strong>是否只有一个输入文件和一个输出文件，如果是，用简单滤镜，否，则应该用复杂滤镜</strong><br><br>执行一个命令试试<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -lavfi &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面的命令等效于<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -filter_complex &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面命令作用是给视频添左上角加一个水印，命令可以成功执行，打开输出文件可以看到doggie已经成功加上去了<br><br><img src="filter1.jpg" alt="filter1"><br>为了验证上面的结论，咱们把命令换成下面的<br><br><code>ffmpeg -hide_banner -i big_buck_bunny.mp4 -i doggie2.png -vf &quot;overlay=x=50:y=50&quot; out.mp4 -y</code><br><br>上面命令把<code>-filter_complex</code>换成了<code>-vf</code>，结果自然是会出错的，错误日志如下<br><br><img src="filter2.jpg" alt="filter error"><br>红框中的日志说的很清楚，<strong>对于简单滤镜，只能有一个输入输出</strong><br><br>所以，当有多个输入文件时，需要使用复杂滤镜。</p><h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h2>]]></content>
     
@@ -154,6 +160,8 @@
     
     
     
+    <category term="ffmpeg" scheme="https://misland.github.io/categories/ffmpeg/"/>
+    
     
   </entry>
   
@@ -162,7 +170,7 @@
     <link href="https://misland.github.io/2021/02/18/ffmpeg-log/"/>
     <id>https://misland.github.io/2021/02/18/ffmpeg-log/</id>
     <published>2021-02-18T08:14:00.000Z</published>
-    <updated>2021-02-23T08:06:22.493Z</updated>
+    <updated>2021-03-11T02:34:32.685Z</updated>
     
     <content type="html"><![CDATA[<p>ffmpeg默认就会输出一些日志，包含编译的工具（gcc版本）、可用的组件（–enable-xxxx）、组件版本号码，如下图<br><img src="1.jpg" alt="log"></p><a id="more"></a><p>这些信息是默认输出的，每次执行合作都会打印在控制台中，如果不想看这些信息，ffmpeg提供了<code>-hide_banner</code>选项，添加该选项后，即不会打印这些信息<br>而在执行日志层面，ffmpeg日志与通用日志一致，也有级别的概念，可以使用<code>-v</code>选项来控制，设置级别时，可以使用英文单词，也可以使用数字，具体的级别如下</p><h3 id="debug-48"><a href="#debug-48" class="headerlink" title="debug 48"></a>debug 48</h3><p>即debug级别的日志，在ffmpeg中使用48来标记，该级别会打印全部的日志，执行一个命令试试<br><code>ffmpeg -v debug -i 3.mp4 -vf scale=192x108 out.mp4 -y</code><br>该命令等效于<br><code>ffmpeg -v 48 -i 3.mp4 -vf scale=192x108 out.mp4 -y</code><br>执行命令后，控制台输出日志如下<br><img src="2.jpg" alt="debug_log"><br>上面的命令，将视频压缩成190x108分辨率的视频，使用了<code>-vf</code>选项，可以看到红框中的信息，将命令执行时的步骤很详细的打印了出来。</p><h3 id="verbose-40"><a href="#verbose-40" class="headerlink" title="verbose 40"></a>verbose 40</h3><p>比debug日志简略一些，上面的命令同样再执行一次，上图红框中的信息就不再打印了</p><h3 id="info-32"><a href="#info-32" class="headerlink" title="info 32"></a>info 32</h3><p>与verbose相似，显示的日志会稍微少些，这也是ffmpeg默认使用的日志级别</p><h3 id="warning-24"><a href="#warning-24" class="headerlink" title="warning 24"></a>warning 24</h3><p>只显示warning或更严重的日志</p><h3 id="error-16"><a href="#error-16" class="headerlink" title="error 16"></a>error 16</h3><p>只显示错误或更严重的日志</p><h3 id="fatal-8"><a href="#fatal-8" class="headerlink" title="fatal 8"></a>fatal 8</h3><p>只显示致命错误，一般出现这些错误，程序会退出</p><h3 id="panic-0"><a href="#panic-0" class="headerlink" title="panic 0"></a>panic 0</h3><p>只显示程序崩溃的日志，这种一般是ffmpeg内部的错误了，一般二般情况下应该都不会遇到的</p><h3 id="quiet-8"><a href="#quiet-8" class="headerlink" title="quiet -8"></a>quiet -8</h3><p>什么也不显示，包括错误信息，生产环境通常并不会这么做，除非你疯了🤣<br>以上是控制日志打印级别，有时需要将日志保存下来，以备出现问题时定位问题，这时可以使用<code>- report</code>命令，将日志保存到文件中，执行命令<code>ffmpeg -report -i 3.mp4 -vf scale=192x108 out.mp4 -y</code>，执行后文件夹中出现了一个日志文件<br><img src="3.jpg" alt="report_log"><br>打开文件后，发现输出的日志与verbose级别一致。<br>但是这种方式文件名是ffmpeg根据时间默认生成的，如果要指定文件名可以吗？答案当然是肯定的，执行命令<br><code>FFREPORT=file=ffreport.log:level=32 ffmpeg -i 3.mp4 -vf scale=192x108 out.mp4 -y</code><br>成功执行后，会发现文件夹下多了一个名为ffreport.log的文件，即指定生成的日志文件</p><h2 id="监控处理进度"><a href="#监控处理进度" class="headerlink" title="监控处理进度"></a>监控处理进度</h2><p>有时可能会想知道当前处理的进度，这时可以使用<code>-progress</code>选项，执行命令如下<br><code>ffmpeg -progress pro.log -i big_buck_bunny.mp4 -vf scale=192x108 out.mp4 -y</code><br>成功执行后，会有一个pro.log文件，打开后如下<br><img src="4.jpg" alt="progress_log"><br>有了这些信息，就可以了解当前处理的进度，可以做一些人性化的功能。</p><h2 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h2><h2 id="博客地址：暖宝宝官方认证铲屎官"><a href="#博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="博客地址：暖宝宝官方认证铲屎官"></a>博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h2>]]></content>
     
@@ -170,6 +178,8 @@
     <summary type="html">&lt;p&gt;ffmpeg默认就会输出一些日志，包含编译的工具（gcc版本）、可用的组件（–enable-xxxx）、组件版本号码，如下图&lt;br&gt;&lt;img src=&quot;1.jpg&quot; alt=&quot;log&quot;&gt;&lt;/p&gt;</summary>
     
     
+    
+    <category term="ffmpeg" scheme="https://misland.github.io/categories/ffmpeg/"/>
     
     
     <category term="ffmpeg" scheme="https://misland.github.io/tags/ffmpeg/"/>
