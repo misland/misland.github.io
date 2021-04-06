@@ -286,8 +286,8 @@
 </ul>
 <p><strong>第二步：解决上面的两个问题，具体命令如下：</strong><br><code>ffmpeg -i buck.mp4 -i s1.jpg -lavfi &quot;[1:v]format=rgba,rotate=&#39;PI/6:c=0x00000000:ow=hypot(iw,ih):oh=ow&#39;[out];[0:v][out]overlay=10:10&quot; out.mp4 -y</code><br><img src="4-3.jpg" alt="3.jpg"><br>思路是：</p>
 <ul>
-<li>将图片显示的像素格式转换为rgba格式，如果做过前端的小伙伴会很熟悉的，最后的a表示透明度，如此一来，<code>c=0x00000000</code>的作用就是将图片旋转后的背景变为白色且完全透明，这样就不会遮挡视频了</li>
 <li>调整水印宽高，由于图片是长度大于宽度，先根据勾股定律计算图片对角长度(<code>hypot</code>)，将这个值设置为水印的宽高，这样，图片无论如何旋转，都不会超过设定的宽高，也就不会出现图片部分丢失的情况了</li>
+<li>将图片显示的像素格式转换为rgba格式，如果做过前端的小伙伴会很熟悉的，最后的a表示透明度，如此一来，<code>c=0x00000000</code>的作用就是将图片旋转后的背景变为白色且完全透明，这样就不会遮挡视频了</li>
 </ul>
 <p><strong>第三步：让旋转停不下来<img src="huaji.png" alt="huaji">，具体命令如下：</strong><br><code>ffmpeg -i buck.mp4 -loop 1 -i s1.jpg -lavfi &quot;[1:v]format=rgba,rotate=&#39;PI/2*t:c=0x00000000:ow=hypot(iw,ih):oh=ow&#39;[out];[0:v][out]overlay=10:10&quot; -shortest out.mp4 -y</code><br><img src="4-4.gif" alt="4.jpg"><br>细心的小伙伴会发现，这次水印图片前面添加了<code>-loop 1</code>参数，具体为什么要添加相信看过第四篇(<a href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/">传送门</a>)的小伙伴已清知道了，这里再重复一遍：因为水印图片默认在播放一次后就停下来，保留最后一帧，所以要让水印图片保持循环才行</p>
 <p><strong>小作业：让水印位置也随着时间动起来？<img src="huaji.png" alt="huaji"></strong></p>
