@@ -6,7 +6,7 @@
   <link href="https://misland.github.io/atom.xml" rel="self"/>
   
   <link href="https://misland.github.io/"/>
-  <updated>2021-04-06T07:26:53.324Z</updated>
+  <updated>2021-04-06T07:29:54.330Z</updated>
   <id>https://misland.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://misland.github.io/2021/04/06/ffmpeg-watermark-4/"/>
     <id>https://misland.github.io/2021/04/06/ffmpeg-watermark-4/</id>
     <published>2021-04-06T06:22:23.000Z</published>
-    <updated>2021-04-06T07:26:53.324Z</updated>
+    <updated>2021-04-06T07:29:54.330Z</updated>
     
-    <content type="html"><![CDATA[<p>这篇把上次挖的坑填上<br>ffmpeg正式篇的上一篇(<a href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/">传送门</a>)说了，这一篇要让水印旋转起来，但是后面有事情一直没有时间搞，今天，它来了…………</p><p>如果想实现旋转的功能，需要使用ffmpeg过滤器的链式功能，即：先把作为水印的图片旋转，再覆盖到视频上</p><p><strong>第一步，实现旋转功能，具体的命令如下：</strong><br><code>ffmpeg -i buck.mp4 -i s1.jpg -lavfi &quot;[1:v]rotate=PI/6:c=none[out];[0:v][out]overlay=10:10&quot; out.mp4 -y</code><br>而实际出来的效果如下：<br><img src="4-1.jpg" alt="1.jpg"><br>可以看到，旋转功能已经实现了，但是却有问题：由于图片是长方形的，旋转后图片丢失了部分，并且图片移走的部分是绿色的，完全无法使用</p><p><strong>第二步：解决上面的两个问题，具体命令如下：</strong><br><code>ffmpeg -i buck.mp4 -i s1.jpg -lavfi &quot;[1:v]format=rgba,rotate=&#39;PI/6:c=0x00000000:ow=hypot(iw,ih):oh=ow&#39;[out];[0:v][out]overlay=10:10&quot; out.mp4 -y</code><br><img src="4-3.jpg" alt="3.jpg"><br>思路是：</p><ul><li>将图片显示的像素格式转换为rgba格式，如果做过前端的小伙伴会很熟悉的，最后的a表示透明度，如此一来，<code>c=0x00000000</code>的作用就是将图片旋转后的背景变为白色且完全透明，这样就不会遮挡视频了</li><li>调整水印宽高，由于图片是长度大于宽度，先根据勾股定律计算图片对角长度(<code>hypot</code>)，将这个值设置为水印的宽高，这样，图片无论如何旋转，都不会超过设定的宽高，也就不会出现图片部分丢失的情况了</li></ul><p><strong>第三步：让旋转停不下来<img src="huaji.png" alt="huaji">，具体命令如下：</strong><br><code>ffmpeg -i buck.mp4 -loop 1 -i s1.jpg -lavfi &quot;[1:v]format=rgba,rotate=&#39;PI/2*t:c=0x00000000:ow=hypot(iw,ih):oh=ow&#39;[out];[0:v][out]overlay=10:10&quot; -shortest out.mp4 -y</code><br><img src="4-4.gif" alt="4.jpg"><br>细心的小伙伴会发现，这次水印图片前面添加了<code>-loop 1</code>参数，具体为什么要添加相信看过第四篇(<a href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/">传送门</a>)的小伙伴已清知道了，这里再重复一遍：因为水印图片默认在播放一次后就停下来，保留最后一帧，所以要让水印图片保持循环才行</p><p><strong>小作业：让水印位置也随着时间动起来？<img src="huaji.png" alt="huaji"></strong></p>]]></content>
+    <content type="html"><![CDATA[<p>这篇把上次挖的坑填上<br>ffmpeg正式篇的上一篇(<a href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/">传送门</a>)说了，这一篇要让水印旋转起来，但是后面有事情一直没有时间搞，今天，它来了…………</p><p>如果想实现旋转的功能，需要使用ffmpeg过滤器的链式功能，即：先把作为水印的图片旋转，再覆盖到视频上</p><p><strong>第一步，实现旋转功能，具体的命令如下：</strong><br><code>ffmpeg -i buck.mp4 -i s1.jpg -lavfi &quot;[1:v]rotate=PI/6:c=none[out];[0:v][out]overlay=10:10&quot; out.mp4 -y</code><br>而实际出来的效果如下：<br><img src="4-1.jpg" alt="1.jpg"><br>可以看到，旋转功能已经实现了，但是却有两个问题：</p><ul><li>由于图片是长方形的，旋转后图片丢失了部分</li><li>图片移走的部分是绿色的，完全无法直视</li></ul><p><strong>第二步：解决上面的两个问题，具体命令如下：</strong><br><code>ffmpeg -i buck.mp4 -i s1.jpg -lavfi &quot;[1:v]format=rgba,rotate=&#39;PI/6:c=0x00000000:ow=hypot(iw,ih):oh=ow&#39;[out];[0:v][out]overlay=10:10&quot; out.mp4 -y</code><br><img src="4-3.jpg" alt="3.jpg"><br>思路是：</p><ul><li>将图片显示的像素格式转换为rgba格式，如果做过前端的小伙伴会很熟悉的，最后的a表示透明度，如此一来，<code>c=0x00000000</code>的作用就是将图片旋转后的背景变为白色且完全透明，这样就不会遮挡视频了</li><li>调整水印宽高，由于图片是长度大于宽度，先根据勾股定律计算图片对角长度(<code>hypot</code>)，将这个值设置为水印的宽高，这样，图片无论如何旋转，都不会超过设定的宽高，也就不会出现图片部分丢失的情况了</li></ul><p><strong>第三步：让旋转停不下来<img src="huaji.png" alt="huaji">，具体命令如下：</strong><br><code>ffmpeg -i buck.mp4 -loop 1 -i s1.jpg -lavfi &quot;[1:v]format=rgba,rotate=&#39;PI/2*t:c=0x00000000:ow=hypot(iw,ih):oh=ow&#39;[out];[0:v][out]overlay=10:10&quot; -shortest out.mp4 -y</code><br><img src="4-4.gif" alt="4.jpg"><br>细心的小伙伴会发现，这次水印图片前面添加了<code>-loop 1</code>参数，具体为什么要添加相信看过第四篇(<a href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/">传送门</a>)的小伙伴已清知道了，这里再重复一遍：因为水印图片默认在播放一次后就停下来，保留最后一帧，所以要让水印图片保持循环才行</p><p><strong>小作业：让水印位置也随着时间动起来？<img src="huaji.png" alt="huaji"></strong></p>]]></content>
     
     
       
