@@ -291,7 +291,7 @@
 </ul>
 <p><strong>第三步：让旋转停不下来<img src="huaji.png" alt="huaji">，具体命令如下：</strong><br><code>ffmpeg -i buck.mp4 -loop 1 -i s1.jpg -lavfi &quot;[1:v]format=rgba,rotate=&#39;PI/2*t:c=0x00000000:ow=hypot(iw,ih):oh=ow&#39;[out];[0:v][out]overlay=10:10&quot; -shortest out.mp4 -y</code><br><img src="4-4.gif" alt="4.jpg"><br>细心的小伙伴会发现，这次水印图片前面添加了<code>-loop 1</code>参数，具体为什么要添加相信看过第四篇(<a href="https://misland.github.io/2021/02/24/ffmpeg-watermark-2/">传送门</a>)的小伙伴已清知道了，这里再重复一遍：因为水印图片默认在播放一次后就停下来，保留最后一帧，所以要让水印图片保持循环才行</p>
 <p><strong>小作业：让水印位置也随着时间动起来？<img src="huaji.png" alt="huaji"></strong></p>
-
+<h1 id="有问题请留言沟通，欢迎转载，转载请注明出处"><a href="#有问题请留言沟通，欢迎转载，转载请注明出处" class="headerlink" title="有问题请留言沟通，欢迎转载，转载请注明出处"></a>有问题请留言沟通，欢迎转载，转载请注明出处</h1><h1 id="欢迎点击个人博客地址：暖宝宝官方认证铲屎官"><a href="#欢迎点击个人博客地址：暖宝宝官方认证铲屎官" class="headerlink" title="欢迎点击个人博客地址：暖宝宝官方认证铲屎官"></a>欢迎点击个人博客地址：<a href="https://misland.github.io/">暖宝宝官方认证铲屎官</a></h1>
   </div>
   <!--文末结束语-->
   
@@ -320,7 +320,7 @@
     <ul class="mdui-menu" id="toc">
       <li class="mdui-menu-item">
         <a href="/2021/04/06/ffmpeg-watermark-4/" id="toc-header" class="mdui-ripple">文章目录</a>
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E9%97%AE%E9%A2%98%E8%AF%B7%E7%95%99%E8%A8%80%E6%B2%9F%E9%80%9A%EF%BC%8C%E6%AC%A2%E8%BF%8E%E8%BD%AC%E8%BD%BD%EF%BC%8C%E8%BD%AC%E8%BD%BD%E8%AF%B7%E6%B3%A8%E6%98%8E%E5%87%BA%E5%A4%84"><span class="toc-number">1.</span> <span class="toc-text">有问题请留言沟通，欢迎转载，转载请注明出处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AC%A2%E8%BF%8E%E7%82%B9%E5%87%BB%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%9C%B0%E5%9D%80%EF%BC%9A%E6%9A%96%E5%AE%9D%E5%AE%9D%E5%AE%98%E6%96%B9%E8%AE%A4%E8%AF%81%E9%93%B2%E5%B1%8E%E5%AE%98"><span class="toc-number">2.</span> <span class="toc-text">欢迎点击个人博客地址：暖宝宝官方认证铲屎官</span></a></li></ol>
       </li>
     </ul>
   </div>
